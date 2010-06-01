@@ -1,0 +1,13 @@
+DOM Node ID Naming convention
+
+|------+---------------------------------------|
+|  Idx | Values                                |
+|------+---------------------------------------|
+|    0 | U = USA, C = CSA                      |
+| 1..2 | Card #                                |
+|    1 | I = Infantry, C = Cavalry, L = Leader |
+|    2 | 1..5  Strength                        |
+|    3 | 0..2 Attack Initiative                |
+|    4 | 0..2 Defense Initiative               |
+|      |                                       |
+|------+---------------------------------------|

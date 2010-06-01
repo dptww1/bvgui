@@ -1,0 +1,57 @@
+body {
+    font: 9pt Geneva, sans-serif;
+}
+
+.oobRoot {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.oobRoot ul {
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+.oobRoot li {
+    list-style-type: none;
+}
+
+.oobRoot ul li {
+    list-style-image: url(../Images/child.png);
+}
+
+.oobRoot ul ul li {
+    list-style-image: url(../Images/child.png);
+}
+
+
+#cadre {
+    min-width: 500px;
+    min-height: 100px;
+//    float: right;
+    background-color: #999;
+//    border: 1px solid #333;
+    padding: 1em;
+    z-order: 10;
+}
+
+#cadre .title {
+    font-weight: bold;
+}
+
+#cadre ul {
+    list-style-type: none;
+    left: 1em;
+}
+
+#usaWest {
+    background-color: #ccf;
+    border: 1px solid #333;
+    padding: 1em;
+    display: block;
+}
+
+.okToDrop {
+    background-color: #ffcccc;
+    border: 1px solid #f00;
+}
