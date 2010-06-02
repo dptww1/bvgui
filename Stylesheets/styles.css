@@ -30,7 +30,7 @@ body {
     min-height: 100px;
 //    float: right;
     background-color: #999;
-//    border: 1px solid #333;
+    border: 1px solid #333;
     padding: 1em;
     z-order: 10;
 }
@@ -52,6 +52,6 @@ body {
 }
 
 .okToDrop {
-    background-color: #ffcccc;
-    border: 1px solid #f00;
+    background-color: #ffcccc !important;
+    border: 1px solid #f00    !important;
 }
