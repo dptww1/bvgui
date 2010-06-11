@@ -1,4 +1,15 @@
-var draggable;
+function drawCard(side) {
+    var card = Server.drawCard(side);
+    if (card == null) {
+        alert("Deck is empty!");
+        return;
+    }
+    var container = $(side + "Hand").down("ul");
+    var cardNode = DomUtil.mkCardNode(card);
+    new Draggable(cardNode, { revert: "failure" } );
+    container.appendChild(cardNode);
+    new Effect.BlindDown(cardNode, { duration: 0.5 } );
+}
 
 function dropCard(dropElt, dragElt) {
     dragElt.remove();
@@ -24,8 +35,11 @@ function domLoaded() {
   });
 
   $$(".ldr", ".inf", ".cav").each( function(elt) {
-      new Draggable(elt.id, { revert: "failure", zindex: 1500 } );
+      new Draggable(elt.id, { revert: "failure" } );
   });
+
+  $("usaDrawCardLink").href = "javascript:drawCard('usa')";
+  $("csaDrawCardLink").href = "javascript:drawCard('csa')";
 
   new Proto.Menu({
       selector: ".inf",
@@ -37,3 +51,35 @@ function domLoaded() {
   });
 }
 
+var DomUtil = function() {
+    var _classTemplate = new Template("#{side} #{type}");
+
+    var _labelTemplates = {
+        cav: new Template("<img src='Images/cav_#{side}.png' width='18' height='12' border='0'> #{label} C#{str}"),
+        inf: new Template("<img src='Images/inf_#{side}.png' width='18' height='12' border='0'> #{label} I#{str}"),
+        ldr: new Template("#{label} L#{str}")
+    };
+
+    return {
+        mkCardNode : function(card) {
+            var t = card.type;
+            var n = new Element("li", { "class": _classTemplate.evaluate(card), id: card.id, style: "display:none" });
+            n.update(_labelTemplates[t].evaluate(card));
+            return n;
+        }
+    };
+}();
+
+var Server = function() {
+    var usaDeck = [
+        { type: "ldr", side: "usa", id: "U017", str: 1, label: "Buell" },
+        { type: "inf", side: "usa", id: "U040", str: 3, label: "X Corps" }
+    ];
+    var csaDeck = [
+        { type: "cav", side: "csa", id: "C048", str: 1, label: "Van Dorn" }
+    ];
+
+    return {
+        drawCard : function(side) { return side == "usa" ? usaDeck.pop() : csaDeck.pop(); }
+    };
+}();
