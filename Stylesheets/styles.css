@@ -30,7 +30,7 @@ body {
 
 #csaCadre {
     min-height: 100px;
-    background-color: #aaa;
+    background-color: #ccc;
     border: 1px solid #333;
     padding: 1em;
 }
@@ -41,21 +41,21 @@ body {
 }
 
 #csaWest {
-    background-color: #ffc;
+    background-color: #ffe;
     border: 1px solid #333;
     padding: 1em;
     min-height: 100px;
 }
 
 #csaEast {
-    background-color: #ffc;
+    background-color: #ffe;
     border: 1px solid #333;
     padding: 1em;
     min-height: 100px;
 }
 
 #csaHand {
-    background-color: #ffc;
+    background-color: #ffe;
     border: 1px solid #333;
     padding: 1em;
     min-height: 100px;
@@ -63,7 +63,7 @@ body {
 
 #usaCadre {
     min-height: 100px;
-    background-color: #999;
+    background-color: #ccc;
     border: 1px solid #333;
     padding: 1em;
 }
@@ -95,6 +95,10 @@ body {
 }
 
 .okToDrop {
-    background-color: #ffcccc !important;
-    border: 1px solid #f00    !important;
+    background-color: #fcc !important;
+    border: 1px solid #f00 !important;
+}
+
+li {
+    cursor: pointer;
 }
