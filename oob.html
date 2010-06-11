@@ -2,10 +2,12 @@
 <html> <head>
 <title>OOB</title>
 <link rel="stylesheet" href="Stylesheets/styles.css" type="text/css">
+<link rel="stylesheet" href="Stylesheets/splitpane.css" type="text/css">
 <link rel="stylesheet" href="Stylesheets/proto.menu.0.6.css" type="text/css"/>
 <script src="LibJS/prototype.js"></script>
 <script src="LibJS/proto.menu.0.6.js"></script>
 <script src="LibJS/scriptaculous.js"></script>
+<script src="LibJS/splitpane.js"></script>
 <script src="JS/oob.js"></script>
 </head>
 <body>
@@ -20,43 +22,82 @@ is straight out of 1999.
 
 <p>If nothing happens, you're either working with JavaScript turned off, or you're using a very old browser.</p>
 
-<div id="cadre" class="holdsInf holdsCav holdsLdr">
-<p class="title">USA Cadre</p>
-<ul class="oobRoot">
-</ul>
+<div id="usa">
+  <div id="usaHand" class="unstacks holdsInf holdsCav holdsLdr column">
+    <p class="title">USA Hand</p>
+      <ul class="oobRoot"></ul>
+  </div>
+
+  <div id="usaWest" class="column">
+    <p class="title">USA West</p>
+    <ul class="oobRoot">
+      <li class="usa ldr holdsInf holdsCav holdsLdr" id="U201">Grant L4
+        <ul>
+          <li class="usa ldr holdsInf holdsCav" id="U202">McPherson L2
+            <ul>
+              <li class="usa inf" id="U123"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XIII Corps I4
+              <li class="usa inf" id="U124"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XVII Corps I4
+            </ul>
+          <li class="usa ldr holdsInf holdsCav" id="U203">Meade L3
+            <ul>
+              <li class="usa inf" id="U125"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XXI Corps I4
+              <li class="usa inf" id="U126"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XVI Corps I2
+            </ul>
+          <li class="usa inf" id="U131"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XV Corps I5
+        </ul>
+
+      <li class="usa ldr holdsInf holdsCav holdsLdr" id="U204">Sherman L2
+        <ul>
+          <li class="usa cav" id="U127"><img src="Images/cav_usa.png" width="18" height="12" border="0"> Stoneman C1
+        
+          <li class="usa ldr holdsInf holdsCav" id="U205">Thomas L3
+            <ul>
+              <li class="usa inf" id="U128"><img src="Images/inf_usa.png" width="18" height="12" border="0"> I Corps I5
+            </ul>
+
+          <li class="usa ldr holdsInf holdsCav" id="U206">McDowell L1
+            <ul>
+              <li class="usa inf" id="U129"><img src="Images/inf_usa.png" width="18" height="12" border="0"> II Corps I5
+              <li class="usa inf" id="U130"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XX Corps I5
+            </ul>
+        </ul>
+    </ul>
+  </div>
+
+  <div id="usaEast" class="column">
+    <p class="title">USA East</p>
+    <ul class="oobRoot">
+    </ul>
+  </div>
+    
+  <div id="usaCadre" class="unstacks holdsInf holdsCav holdsLdr column">
+    <p class="title">USA Cadre</p>
+      <ul class="oobRoot"></ul>
+  </div>
 </div>
 
-<div id="usaWest" width="50%">
-<ul class="oobRoot">
-    <li class="usa ldr holdsInf holdsCav holdsLdr" id="U201">Grant L4
-    <ul>
-        <li class="usa ldr holdsInf holdsCav" id="U202">McPherson L2
-        <ul>
-            <li class="usa inf" id="U123"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XIII Corps I4
-            <li class="usa inf" id="U124"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XVII Corps I4
-        </ul>
-        <li class="usa ldr holdsInf holdsCav" id="U203">Meade L3
-        <ul>
-            <li class="usa inf" id="U125"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XXI Corps I4
-            <li class="usa inf" id="U126"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XVI Corps I2
-        </ul>
-        <li class="usa inf" id="U131"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XV Corps I5
-    </ul>
+<br clear="left">
+      
+<div id="csa">
+  <div id="csaHand" class="unstacks holdsInf holdsCav holdsLdr column">
+    <p class="title">CSA Hand</p>
+      <ul class="oobRoot"></ul>
+  </div>
 
-    <li class="usa ldr holdsInf holdsCav holdsLdr" id="U204">Sherman L2
-    <ul>
-        <li class="usa cav" id="U127"><img src="Images/cav_usa.png" width="18" height="12" border="0"> Stoneman C1
-        <li class="usa ldr holdsInf holdsCav" id="U205">Thomas L3
-        <ul>
-            <li class="usa inf" id="U128"><img src="Images/inf_usa.png" width="18" height="12" border="0"> I Corps I5
-        </ul>
-        <li class="usa ldr holdsInf holdsCav" id="U206">McDowell L1
-        <ul>
-            <li class="usa inf" id="U129"><img src="Images/inf_usa.png" width="18" height="12" border="0"> II Corps I5
-            <li class="usa inf" id="U130"><img src="Images/inf_usa.png" width="18" height="12" border="0"> XX Corps I5
-        </ul>
-    </ul>
-</ul>
+  <div id="csaWest" class="unstacks holdsInf holdsCav holdsLdr column">
+    <p class="title">CSA West</p>
+      <ul class="oobRoot"></ul>
+  </div>
+
+  <div id="csaEast" class="unstacks holdsInf holdsCav holdsLdr column">
+    <p class="title">CSA East</p>
+      <ul class="oobRoot"></ul>
+  </div>
+
+  <div id="csaCadre" class="unstacks holdsInf holdsCav holdsLdr column">
+    <p class="title">CSA Cadre</p>
+      <ul class="oobRoot"></ul>
+  </div>
 </div>
 
 <script type="text/javascript">

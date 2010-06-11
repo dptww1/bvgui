@@ -1,0 +1,11 @@
+.column {
+    float: left; /* This is forces the page content to adjust to changes in height of the columns */
+//    overflow: hidden; /* As a precaution, all content is clipped to the column width */ /*DPT: draggables are then clipped to the owning div!*/
+    margin: 0; /* This and padding need to be zero */
+    padding: 0;
+/   z-index: 1;
+}
+
+.splitpane-divider {
+    background-color: #ff0000;
+}

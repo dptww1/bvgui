@@ -24,22 +24,51 @@ body {
     list-style-image: url(../Images/child.png);
 }
 
-
-#cadre {
-    min-width: 500px;
-    min-height: 100px;
-//    float: right;
-    background-color: #999;
-    border: 1px solid #333;
-    padding: 1em;
-    z-order: 10;
-}
-
-#cadre .title {
+.column .title {
     font-weight: bold;
 }
 
-#cadre ul {
+#csaCadre {
+    min-height: 100px;
+    background-color: #aaa;
+    border: 1px solid #333;
+    padding: 1em;
+}
+
+#csaCadre ul {
+    list-style-type: none;
+    left: 1em;
+}
+
+#csaWest {
+    background-color: #ffc;
+    border: 1px solid #333;
+    padding: 1em;
+    min-height: 100px;
+}
+
+#csaEast {
+    background-color: #ffc;
+    border: 1px solid #333;
+    padding: 1em;
+    min-height: 100px;
+}
+
+#csaHand {
+    background-color: #ffc;
+    border: 1px solid #333;
+    padding: 1em;
+    min-height: 100px;
+}
+
+#usaCadre {
+    min-height: 100px;
+    background-color: #999;
+    border: 1px solid #333;
+    padding: 1em;
+}
+
+#usaCadre ul {
     list-style-type: none;
     left: 1em;
 }
@@ -48,7 +77,21 @@ body {
     background-color: #ccf;
     border: 1px solid #333;
     padding: 1em;
-    display: block;
+    min-height: 100px;
+}
+
+#usaEast {
+    background-color: #ccf;
+    border: 1px solid #333;
+    padding: 1em;
+    min-height: 100px;
+}
+
+#usaHand {
+    background-color: #ccf;
+    border: 1px solid #333;
+    padding: 1em;
+    min-height: 100px;
 }
 
 .okToDrop {

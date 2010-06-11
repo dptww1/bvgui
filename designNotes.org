@@ -1,4 +1,48 @@
-DOM Node ID Naming convention
+* UI Buildout Steps
+** Tooltips with special rules
+** Top-level leaders should show force strength total
+** leaders moved to cadre should have their subordinates (recusively) rooted to cadre, too
+** Context Menus
+*** Flip
+*** Deplete
+*** Restore
+*** Discard (or is this a drag-n-drop?)
+*** Send to Trans-Mississippi (or is this a drag-n-drop)
+
+** add USA East, make layout horizontal instead of vertical
+
+* Fields
+
+Lookup/Constants
+
+|----------+-----+-----+-----+-----+------+---------+----------------------------------------------|
+| Name     | Inf | Cav | Ldr | Nav | Enig | Type    | Comments                                     |
+|----------+-----+-----+-----+-----+------+---------+----------------------------------------------|
+| name     | X   | X   | X   | X   | X    | String  |                                              |
+| side     | X   | X   | X   | X   | X    | String  | "usa", "csa"                                 |
+| type     | X   | X   | X   | X   | X    | String  | "inf", "cav", "ldr", "nav", "enigma"         |
+| str      | X   | X   | X   | X   | -    | Number  |                                              |
+| depstr   | X   | X   | -   | -   | -    | Number  | depleted strength                            |
+| theater  | X   | X   | -   | -   | -    | String  | "West", "East"                               |
+| special  | X   | X   | X   | X   | X    | String  |                                              |
+| ainit    | -   | -   | X   | -   | -    | Number  | attack initiative                            |
+| dinit    | -   | -   | X   | -   | -    | Number  | defense initiative                           |
+| acap     | -   | -   | X   | -   | -    | Number  | army capacity                                |
+| ccap     | -   | -   | X   | -   | -    | Number  | corps capacity                               |
+| scap     | -   | -   | X   | -   | -    | Number  | subordinate capacity (0 = won't subordinate) |
+| politics | -   | -   | X   | -   | -    | String  | "Political Favor", "Political Disfavor"      |
+| wontsub  | X   | -   | X   | -   | -    | Boolean | true = wont subordinate, false = will        |
+| twosteps | X   | X   | -   | -   | -    | Boolean | true = depletable, false = only one step     |
+|----------+-----+-----+-----+-----+------+---------+----------------------------------------------|
+
+Dynamic Fields
+|----------+-----+-----+-----+-----+------+---------+---------------------------------------|
+| Name     | Inf | Cav | Ldr | Nav | Enig | Type    | Comments                              |
+|----------+-----+-----+-----+-----+------+---------+---------------------------------------|
+| depleted | X   | X   | -   | -   | -    | Boolean | true = depleted, false = not depleted |
+|----------+-----+-----+-----+-----+------+---------+---------------------------------------|
+  
+* DOM Node ID Naming convention
 
 |------+---------------------------------------|
 |  Idx | Values                                |
@@ -11,3 +55,4 @@ DOM Node ID Naming convention
 |    4 | 0..2 Defense Initiative               |
 |      |                                       |
 |------+---------------------------------------|
+
