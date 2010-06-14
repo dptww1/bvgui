@@ -57,7 +57,7 @@ var DomUtil = function() {
     var _labelTemplates = {
         cav: new Template("<img src='Images/cav_#{side}.png' width='18' height='12' border='0'> #{label} C#{str}"),
         inf: new Template("<img src='Images/inf_#{side}.png' width='18' height='12' border='0'> #{label} I#{str}"),
-        ldr: new Template("#{label} L#{str}")
+        ldr: new Template("<img src='Images/ldr_#{side}.png' width='18' height='12' border='0'> #{label} L#{str}")
     };
 
     return {
