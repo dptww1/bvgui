@@ -15,25 +15,26 @@
 
 Lookup/Constants
 
-|----------+-----+-----+-----+-----+------+---------+----------------------------------------------|
-| Name     | Inf | Cav | Ldr | Nav | Enig | Type    | Comments                                     |
-|----------+-----+-----+-----+-----+------+---------+----------------------------------------------|
-| name     | X   | X   | X   | X   | X    | String  |                                              |
-| side     | X   | X   | X   | X   | X    | String  | "usa", "csa"                                 |
-| type     | X   | X   | X   | X   | X    | String  | "inf", "cav", "ldr", "nav", "enigma"         |
-| str      | X   | X   | X   | X   | -    | Number  |                                              |
-| depstr   | X   | X   | -   | -   | -    | Number  | depleted strength                            |
-| theater  | X   | X   | -   | -   | -    | String  | "West", "East"                               |
-| special  | X   | X   | X   | X   | X    | String  |                                              |
-| ainit    | -   | -   | X   | -   | -    | Number  | attack initiative                            |
-| dinit    | -   | -   | X   | -   | -    | Number  | defense initiative                           |
-| acap     | -   | -   | X   | -   | -    | Number  | army capacity                                |
-| ccap     | -   | -   | X   | -   | -    | Number  | corps capacity                               |
-| scap     | -   | -   | X   | -   | -    | Number  | subordinate capacity (0 = won't subordinate) |
-| politics | -   | -   | X   | -   | -    | String  | "Political Favor", "Political Disfavor"      |
-| wontsub  | X   | -   | X   | -   | -    | Boolean | true = wont subordinate, false = will        |
-| twosteps | X   | X   | -   | -   | -    | Boolean | true = depletable, false = only one step     |
-|----------+-----+-----+-----+-----+------+---------+----------------------------------------------|
+|----------+-----+-----+-----+-----+-----+------+---------+-------------------------------------------------|
+| Name     | Inf | Cav | Ldr | Nav | Map | Enig | Type    | Comments                                        |
+|----------+-----+-----+-----+-----+-----+------+---------+-------------------------------------------------|
+| name     | X   | X   | X   | X   | X   | X    | String  |                                                 |
+| side     | X   | X   | X   | X   | X   | X    | String  | "usa", "csa"                                    |
+| type     | X   | X   | X   | X   | X   | X    | String  | "inf", "cav", "ldr", "nav", "map", "enigma"     |
+| str      | X   | X   | X   | X   | -   | -    | Number  |                                                 |
+| depstr   | X   | X   | -   | -   | -   | -    | Number  | depleted strength                               |
+| theater  | X   | X   | -   | -   | -   | -    | String  | "West", "East"                                  |
+| special  | X   | X   | X   | X   | -   | X    | String  |                                                 |
+| ainit    | -   | -   | X   | -   | -   | -    | Number  | attack initiative                               |
+| dinit    | -   | -   | X   | -   | -   | -    | Number  | defense initiative                              |
+| acap     | -   | -   | X   | -   | -   | -    | Number  | army capacity                                   |
+| ccap     | -   | -   | X   | -   | -   | -    | Number  | corps capacity                                  |
+| scap     | -   | -   | X   | -   | -   | -    | Number  | subordinate capacity (0 = won't subordinate)    |
+| politics | -   | -   | X   | -   | -   | -    | String  | "f" = Political Favor, "d" = Political Disfavor |
+| latewar  | X   | X   | X   | X   | -   | X    | Boolean | true = Late War card, false = not Late War      |
+| wontsub  | X   | -   | X   | -   | -   | -    | Boolean | true = wont subordinate, false = will           |
+| twosteps | X   | X   | -   | -   | -   | -    | Boolean | true = depletable, false = only one step        |
+|----------+-----+-----+-----+-----+-----+------+---------+-------------------------------------------------|
 
 Dynamic Fields
 |----------+-----+-----+-----+-----+------+---------+---------------------------------------|
