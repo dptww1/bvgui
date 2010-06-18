@@ -20,22 +20,37 @@ function dropCard(dropElt, dragElt) {
     }
 }
 
+var activeDropTargets = $A();
+
+function createDropTargets(o, event) {
+    var ids = $A(Server.getDropTargets(o.element.id));
+    ids.each( function(id) {
+        var elt = $(id);
+        Droppables.add(elt, {
+          constraint:  false,
+          dropOnEmpty: true,
+          hoverclass:  "okToDrop",
+          onDrop:      function(dragElt, dropElt, evtId) { dropCard(dropElt, dragElt); }
+        });
+    });
+}
+
+function clearDropTargets(elt, event) {
+    activeDropTargets.each( function(elt) { Droppables.remove(elt); } );
+    activeDropTargets.clear();
+}
+
 function domLoaded() {
   // SplitPane and Droppable interfere with each other...
 //  new SplitPane("usaCadre", 16, "usaWest", 16, 16, { active: true } );
 //  new SplitPane("usaWest" , 16, "usaEast", 32, 16, { active: true } );
 
-  $A(["usaHand", "usaWest", "usaEast", "usaCadre"].concat($$(".holdsInf", ".holdsCav", ".holdsLdr"))).each(function(eltName) {
-      Droppables.add($(eltName), {
-          constraint:  false,
-          dropOnEmpty: true,
-          hoverclass:  "okToDrop",
-          onDrop:      function(dragElt, dropElt, evtId) { dropCard(dropElt, dragElt); }
-      });
-  });
-
   $$(".ldr", ".inf", ".cav").each( function(elt) {
-      new Draggable(elt.id, { revert: "failure" } );
+      new Draggable(elt.id, {
+          revert: "failure",
+          onStart: createDropTargets,
+          onEnd:   clearDropTargets
+      });
   });
 
   $("usaDrawCardLink").href = "javascript:drawCard('usa')";
@@ -79,7 +94,37 @@ var Server = function() {
         { type: "cav", side: "csa", id: "C048", str: 1, label: "Van Dorn" }
     ];
 
+    var idOf = function(elt) { return elt.id; };
+
     return {
-        drawCard : function(side) { return side == "usa" ? usaDeck.pop() : csaDeck.pop(); }
+        drawCard : function(side) { return side == "usa" ? usaDeck.pop() : csaDeck.pop(); },
+
+        getDropTargets: function(eltId) {
+            var elt = $(eltId);  // TODO: wrap element, shouldn't be using DOM here
+
+            var ids = $A();
+
+            var side = elt.hasClassName("csa") ? "csa" : "usa";
+
+            // Generic Containers (TODO: not enabled for Enigmas, Navy)
+            ids = ids.concat($A(["Hand", "West", "East", "Cadre"]).collect( function(str) { return side + str; } ));
+
+            if (elt.hasClassName("inf")) {
+                // Infantry can go to any active leader
+                ids = ids.concat($$("." + side + "Active .ldr").collect(idOf));
+
+            } else if (elt.hasClassName("cav")) {
+                // Cavalry can go to any active top-level leader
+                ids = ids.concat($$("." + side + "Active > .oobRoot > .ldr").collect(idOf));
+
+                // Or to a top-level cavalry
+                ids = ids.concat($$("." + side + "Active > .oobRoot > .cav").collect(idOf));
+
+            } else if (elt.hasClassName("ldr")) {
+
+            }
+
+            return ids.compact();
+        }
     };
 }();
