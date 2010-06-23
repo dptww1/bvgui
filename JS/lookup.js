@@ -20,7 +20,7 @@ BVGLOOKUP.Cards.CSA = {
   },
   C006: {
     id: "C006", name: "Beauregard", side: "csa", type: "ldr", str: 2, ainit: 1, dinit: 1, acap: 3, ccap: 0, scap: 0, wontsub: true, politics: "d",
-    special: "May be returned to your hand during Step 1 or Step 2, even if replaced, (unless sacked or wounded)."
+    special: "Won't subordinate. May be returned to your hand during Step 1 or Step 2, even if replaced, (unless sacked or wounded)."
   },
   C007: {
     id: "C007", name: "Pickett", side: "csa", type: "inf", str: "2", theater: "e"
@@ -45,7 +45,8 @@ BVGLOOKUP.Cards.CSA = {
     id: "C013", name: "Cheatham", side: "csa", type: "inf", str: "2", theater: "w"
   },
   C014: {
-    id: "C014", name: "A Johnston", side: "csa", type: "ldr", str: 4, ainit: 1, dinit: 1, acap: 3, ccap: 0, scap: 0, wontsub: true, politics: "f"
+    id: "C014", name: "A Johnston", side: "csa", type: "ldr", str: 4, ainit: 1, dinit: 1, acap: 3, ccap: 0, scap: 0, wontsub: true, politics: "f",
+    special: "Won't subordinate."
   },
   C015: {
     id: "C015", name: "Cleburne", side: "csa", type: "inf", str: "3", theater: "w"
@@ -120,7 +121,8 @@ BVGLOOKUP.Cards.CSA = {
     id: "C037", name: "Map I (CSA)", side: "csa", type: "map"
   },
   C038: {
-    id: "C038", name: "R E Lee", side: "csa", type: "ldr", str: 4, ainit: 2, dinit: 2, acap: 3, ccap: 0, scap: 0, wontsub: true, politics: "f"
+    id: "C038", name: "R E Lee", side: "csa", type: "ldr", str: 4, ainit: 2, dinit: 2, acap: 3, ccap: 0, scap: 0, wontsub: true, politics: "f",
+    special: "Won't subordinate."
   },
   C039: {
     id: "C039", name: "Kirby Smith", side: "csa", type: "ldr", str: 1, ainit: 2, dinit: 2, acap: 0, ccap: 3, scap: 3, politics: "d"
@@ -265,7 +267,7 @@ BVGLOOKUP.Cards.USA = {
     id: "U003", name: "The Devil's Own Luck", side: "usa", type: "enigma"
   },
   U004: {
-    id: "U004", name: "Dept of Washington", side: "usa", type: "ldr", str: 10, ainit: 2, dinit: 2, wontsub: true, ccap: 99,
+    id: "U004", name: "Dept of Washington", side: "usa", type: "ldr", str: 10, ainit: 2, dinit: 2, wontsub: true, ccap: 99,  // TODO: type? wontsub?
     special: "Defends Washington only.  Acts as leader though unaffected by leader combat results.  May temporarily subordinate to another command."
   },
   U005: {
@@ -287,17 +289,19 @@ BVGLOOKUP.Cards.USA = {
     id: "U010", name: "XII Corps", side: "usa", type: "inf", str: 3, theater: "e"
   },
   U011: {
-    id: "U011", name: "McClellan", side: "usa", type: "ldr", str: 0, ainit: 0, dinit: 0, acap: 0, ccap: 6, scap: 0, wontsub: true, politics: "d"
+    id: "U011", name: "McClellan", side: "usa", type: "ldr", str: 0, ainit: 0, dinit: 0, acap: 0, ccap: 6, scap: 0, wontsub: true, politics: "d",
+    special: "Won't subordinate."
   },
   U012: {
       id: "U012", name: "Map C (neutral)", side: "usa", type: "map"
   },
   U013: {
     id: "U013", name: "Banks", side: "usa", type: "ldr", str: 0, ainit: 1, dinit: 1, acap: 0, ccap: 3, scap: 3, wontsub: true,
-    special: "Can be returned to your hand during Step 1 or 2 of your turn, even if replaced."
+    special: "Won't subordinate. Can be returned to your hand during Step 1 or 2 of your turn, even if replaced."
   },
   U014: {
-    id: "U014", name: "Halleck", side: "usa", type: "ldr", str: 1, ainit: 0, dinit: 1, acap: 2, ccap: 0, scap: 0, wontsub: true, politics: "f"
+    id: "U014", name: "Halleck", side: "usa", type: "ldr", str: 1, ainit: 0, dinit: 1, acap: 2, ccap: 0, scap: 0, wontsub: true, politics: "f",
+    special: "Won't subordinate."
   },
   U015: {
     id: "U015", name: "XI Corps", side: "usa", type: "inf", str: 2, theater: "e",
@@ -362,7 +366,8 @@ BVGLOOKUP.Cards.USA = {
     id: "U033", name: "XIX Corps", side: "usa", type: "inf", str: 3, theater: "e"
   },
   U034: {
-    id: "U034", name: "Pope", side: "usa", type: "ldr", str: 1, ainit: 1, dinit: 1, acap: 0, ccap: 5, scap: 0, wontsub: true, politics: "d"
+    id: "U034", name: "Pope", side: "usa", type: "ldr", str: 1, ainit: 1, dinit: 1, acap: 0, ccap: 5, scap: 0, wontsub: true, politics: "d",
+    special: "Won't subordinate."
   },
   U035: {
     id: "U035", name: "Farragut", side: "usa", type: "nav", str: 3
@@ -389,7 +394,8 @@ BVGLOOKUP.Cards.USA = {
     id: "U042", name: "XVIII Corps", side: "usa", type: "inf", str: 3, theater: "e"
   },
   U043: {
-    id: "U043", name: "Rosecrans", side: "usa", type: "ldr", str: 1, ainit: 1, dinit: 1, acap: 0, ccap: 3, scap: 0, wontsub: true, politics: "d"
+    id: "U043", name: "Rosecrans", side: "usa", type: "ldr", str: 1, ainit: 1, dinit: 1, acap: 0, ccap: 3, scap: 0, wontsub: true, politics: "d",
+    special: "Won't subordinate."
   },
   U044: {
     id: "U044", name: "VII Corps", side: "usa", type: "inf", str: 3, theater: "e",
@@ -399,7 +405,8 @@ BVGLOOKUP.Cards.USA = {
     id: "U045", name: "Map G (USA)", side: "usa", type: "map"
   },
   U046: {
-    id: "U046", name: "Burnside", side: "usa", type: "ldr", str: 0, ainit: 1, dinit: 1, acap: 0, ccap: 5, scap: 0, wontsub: true
+    id: "U046", name: "Burnside", side: "usa", type: "ldr", str: 0, ainit: 1, dinit: 1, acap: 0, ccap: 5, scap: 0, wontsub: true,
+    special: "Won't subordinate."
   },
   U047: {
     id: "U047", name: "Wilson", side: "usa", type: "cav", str: 1, ainit: 1, dinit: 1, theater: "w"
