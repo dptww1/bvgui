@@ -74,21 +74,21 @@ body {
 }
 
 #usaWest {
-    background-color: #ccf;
+    background-color: #ddf;
     border: 1px solid #333;
     padding: 1em;
     min-height: 100px;
 }
 
 #usaEast {
-    background-color: #ccf;
+    background-color: #ddf;
     border: 1px solid #333;
     padding: 1em;
     min-height: 100px;
 }
 
 #usaHand {
-    background-color: #ccf;
+    background-color: #ddf;
     border: 1px solid #333;
     padding: 1em;
     min-height: 100px;
@@ -101,4 +101,10 @@ body {
 
 li {
     cursor: pointer;
+}
+
+div.tooltip {
+    background-color: #fff;
+    border: 1px solid #333;
+    padding: 0.25em;
 }

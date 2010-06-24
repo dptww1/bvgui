@@ -1,15 +1,19 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html> <head>
 <title>OOB</title>
-<link rel="stylesheet" href="Stylesheets/styles.css" type="text/css">
-<link rel="stylesheet" href="Stylesheets/splitpane.css" type="text/css">
+<link rel="stylesheet" href="Stylesheets/splitpane.css"      type="text/css">
+<link rel="stylesheet" href="Stylesheets/styles.css"         type="text/css">
 <link rel="stylesheet" href="Stylesheets/proto.menu.0.6.css" type="text/css"/>
+
 <script src="LibJS/prototype.js"></script>
 <script src="LibJS/proto.menu.0.6.js"></script>
 <script src="LibJS/scriptaculous.js"></script>
-<script src="LibJS/splitpane.js"></script>
+<script src="LibJS/tooltip-v0.2.js"></script>
+
 <script src="JS/lookup.js"></script>
 <script src="JS/oob.js"></script>
+<script src="JS/domutil.js"></script>
+<script src="JS/server.js"></script>
 
 </head>
 <body>
@@ -134,11 +138,15 @@ is straight out of 1999.
 
 <br clear="left">
 
-<p><b>New since 2010-06-03</b>
+<p><b>New since 2010-06-16</b>
 <ul>
-    <li>Can't drag CSA cards to USA or vice versa (buggy)
+    <li>Can't drag CSA cards to USA or vice versa
     <li>Real decks are there (need vetting, though)
     <li>Leaders have flags/circles instead of NATO symbol
+    <li>Icons for all card types
+    <li>Drawn cards with special info get a tooltip (but it doesn't travel with the card)
+    <li>Cards with special rules are asterisks
+    <li>leader initiative is shown as part of the label
 </ul>
     
 <p><b>New since 2010-06-03</b>
@@ -156,7 +164,7 @@ is straight out of 1999.
     <li>Context menus
     <li>How to represent flipped unit/groups?
     <li>Show rollup strength
-    <li>Tooltips for special info
+    <li>Fix Tooltip positioning
 <ul>
       
 
