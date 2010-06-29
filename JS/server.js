@@ -1,38 +1,95 @@
 if (!BVG) { BVG = {}; }
 
 BVG.Server = function() {
-    var usaCards = [];
-    var csaCards = [];
+    var drawPile = {
+        usa: [],
+        csa: []
+    };
 
-    var findCard = function(id) {
-        return BVGLOOKUP.Cards[id.charAt(0) == "U" ? "USA" : "CSA"][id];
+    var findById = function(id) {
+        return BVG.Lookup.findCardById(id);
     };
 
     var idOf = function(elt) { return elt.id; };
 
+    var markInPlay = function(inPlayHash, cardHash) {
+        cardHash.keys().each( function(id) {
+            inPlayHash[id] = 1;
+            if (typeof cardHash.get(id) === "object") {
+                markInPlay(inPlayHash, cardHash.get(id));
+            }
+            // can ignore the "else" case of the card having no subordinates
+        });
+    };
+
+    var initDrawPile = function(gameState) {
+        // Figure out which cards are already in play, so don't belong in the draw pile
+        var inPlay = {};
+        markInPlay(inPlay, gameState);
+
+        $A(["csa", "usa"]).each( function(side) {
+            drawPile[side] = [];
+
+            $H(BVG.Lookup.Cards[side]).keys().each( function (id) {
+                if (!inPlay[id]) {
+                    drawPile[side].push(id);
+                }
+            });
+
+            // TODO: This works for the historical game; should shuffle for a random game
+            drawPile[side].sort( function(a, b) { return a < b ? -1 : a === b ? 0 : 1; });
+            drawPile[side] = drawPile[side].reverse();
+        });
+    };
+
     return {
-        drawCard: function(side) { return Object.toJSON(side == "usa" ? usaCards.pop() : csaCards.pop()); },
+        drawCard: function(side) { return Object.toJSON(drawPile[side].pop()); },
 
+        loadGame: function() {
+            var gameState = $H({
+                usaHand: $H({ U001: 1, U002: 1, U003: 1, U004: 1, U005: 1 }),
+                usaWest: $H({
+                    U019: $H({
+                        U067: $H({ U020: 1, U050: 0 }),
+                        U056: $H({ U039: 1, U049: 1 }),
+                        U021: 1
+                    }),
+                    U062: $H({
+                        U053: 1,
+                        U063: $H({ U009: 1 }),
+                        U008: $H({ U024: 1, U037: 1 })
+                    })
+                }),
+                csaHand: $H({ C001: 1, C002: 1, C003: 1, C004: 1, C013: 1, C045: 1 }),
+                csaWest: $H({
+                    C038: $H({
+                        C058: $H({ C028: 1 }),
+                        C039: $H({ C049: 1 }),
+                        C018: $H({ C049: 1 }),
+                        C044: 1
+                    }),
+                    C032: $H({ C059: 1 })
+                })
+            });
+
+            initDrawPile(gameState);
+            return Object.toJSON(gameState);
+        },
+
+        // Returns: {
+        //    usaHand: ["U001", "U002"],
+        //    usaWest: ["U019"]
+        //    ...
+        // };
         newGame: function() {
-            // Put cards refs in the draw decks.  Don't add cards which are already on the display
-            $H(BVGLOOKUP.Cards.USA).keys().each( function(id) {
-                if ($(id) == null) {
-                    usaCards.push(BVGLOOKUP.Cards.USA[id]);
-                }
+            var gameState = $H({
+                usaHand: $H({ U001: 1, U002: 1, U003: 1, U004: 1, U005: 1 }),
+                csaHand: $H({ C001: 1, C002: 1, C003: 1, C004: 1 })
             });
 
-            $H(BVGLOOKUP.Cards.CSA).keys().each( function(id) {
-                if ($(id) == null) {
-                    csaCards.push(BVGLOOKUP.Cards.CSA[id]);
-                }
-            });
+            initDrawPile(gameState);
 
-            [usaCards, csaCards].each( function(deck) {
-                deck.sort( function(a, b) { return a < b ? 1 : a === b ? 0 : -1; });
-            });
-
-            usaCards = usaCards.reverse();
-            csaCards = csaCards.reverse();
+            return Object.toJSON(gameState);
         },
 
         getDropTargets: function(eltId) {
@@ -42,7 +99,7 @@ BVG.Server = function() {
 
             var ids = $A();
 
-            var card = findCard(eltId);
+            var card = findById(eltId);
             switch (card.type) {
             case "inf":
                 // Generic containers
