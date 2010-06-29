@@ -23,7 +23,7 @@ BVG.DomUtil = function() {
         case "map":    return "<img src='Images/map.png' width='18' height='12' border='0'>";
         case "enigma": return "<img src='Images/enigma_" + card.side + ".png' width='18 height='12' border='0'>";
         case "ldr":
-            var imgName = "ldr_" + card.side + "_" + (card.ainit ? "oc" : "sub") + ".png";
+            var imgName = "ldr_" + card.side + "_" + (card.acap ? "oc" : "sub") + ".png";
             return "<img src='Images/" + imgName + "' width='18' height='12' border='0'>";
         }
         throw "_mkIcon can't handle " + card.type;
