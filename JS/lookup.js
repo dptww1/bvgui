@@ -1,8 +1,18 @@
-var BVGLOOKUP = {
-    Cards: {}
-};
+if (BVG == undefined) {
+    var BVG = {};
+}
 
-BVGLOOKUP.Cards.CSA = {
+BVG.Lookup = function() {
+    return {
+        Cards: {},
+
+        findCardById: function(id) {
+            return BVG.Lookup.Cards[id.charAt(0) === "U" ? "usa" : "csa"][id];
+        }
+    };
+}();
+
+BVG.Lookup.Cards.csa = {
   C001: {
     id: "C001", name: "Map D (CSA)", side: "csa", type: "map"
   },
@@ -256,7 +266,7 @@ BVGLOOKUP.Cards.CSA = {
   }
 };
 
-BVGLOOKUP.Cards.USA = {
+BVG.Lookup.Cards.usa = {
   U001: {
       id: "U001", name: "Map A (USA)", side: "usa", type: "map"
   },
