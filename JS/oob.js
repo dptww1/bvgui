@@ -1,4 +1,6 @@
-var BVG = {};
+if (BVG == undefined) {
+    var BVG = {};
+}
 
 function syncContainers() {
     // Heights fails because adding a new card increases the height of the xxxHand element,
@@ -33,21 +35,12 @@ function syncContainers() {
 }
 
 function drawCard(side) {
-    var card = BVG.Server.drawCard(side).evalJSON();
-    if (card == null) {
+    var id = BVG.Server.drawCard(side).evalJSON();
+    if (id == null) {
         alert("Deck is empty!");
         return;
     }
-    var container = $(side + "Hand").down("ul");
-    var cardNode = BVG.DomUtil.mkCardNode(card);
-    new Draggable(cardNode, { revert: "failure", onStart: createDropTargets, onEnd: clearDropTargets } );  // TODO: combine with fn in domLoaded()
-    container.appendChild(cardNode);
-    syncContainers();
-    new Effect.BlindDown(cardNode, { duration: 0.5 } );
-    // after DOM element is added into document, it's safe to make tooltip
-    if (card.special) {
-        new Tooltip(card.id, "SPECIAL: " + card.special);
-    }
+    activateCard(side + "Hand", id);
 }
 
 function dropCard(dropElt, dragElt) {
@@ -80,20 +73,54 @@ function clearDropTargets(elt, event) {
     activeDropTargets.clear();
 }
 
+function activateCard(parent, id) {
+    var card = BVG.Lookup.findCardById(id);
+    var container = $(parent).down("ul");
+    var cardNode = BVG.DomUtil.mkCardNode(card);
+    new Draggable(cardNode, { revert: "failure", onStart: createDropTargets, onEnd: clearDropTargets } );  // TODO: combine with fn in domLoaded()
+    container.appendChild(cardNode);
+    syncContainers();
+    new Effect.BlindDown(cardNode, { duration: 0.15 } );
+    // after DOM element is added into document, it's safe to make tooltip
+    if (card.special) {
+        new Tooltip(card.id, "SPECIAL: " + card.special);
+    }
+
+}
+
+function setupSubtree(parentId, childHash) {
+    $H(childHash).keys().each( function(childId) {
+        activateCard(parentId, childId);
+
+        if (typeof childHash[childId] == "object") {  // if the key's value is an object, it's a hash of subordinates
+            setupSubtree(childId, childHash[childId]);
+
+        } else { // key's value is a number, telling whether the card is at full strength (1) or not (0)
+
+        }
+    });
+}
+
+function setupGame(game) {
+    $$(".oobRoot li").each( function(elt) { elt.remove(); } );
+    $H(game).keys().each( function(id) {
+        setupSubtree(id, game[id]);
+    });
+
+}
+
+function loadGame() {
+    var game = BVG.Server.loadGame().evalJSON();
+    setupGame(game);
+}
+
 function domLoaded() {
   // SplitPane and Droppable interfere with each other...
 //  new SplitPane("usaCadre", 16, "usaWest", 16, 16, { active: true } );
 //  new SplitPane("usaWest" , 16, "usaEast", 32, 16, { active: true } );
 
-  $$(".ldr", ".inf", ".cav").each( function(elt) {
-      new Draggable(elt.id, {
-          revert: "failure",
-          onStart: createDropTargets,
-          onEnd:   clearDropTargets
-      });
-  });
-
-  BVG.Server.newGame();
+  var game = BVG.Server.newGame().evalJSON();
+    setupGame(game);
 
   $("usaDrawCardLink").href = "javascript:drawCard('usa')";
   $("csaDrawCardLink").href = "javascript:drawCard('csa')";
