@@ -23,7 +23,7 @@ BVG.Lookup.Cards.csa = {
     id: "C003", name: "Miracle From God", side: "csa", type: "enigma"
   },
   C004: {
-    id: "C004", name: "Tidewater Militia", side: "csa", type: "inf", str: "2", theater: "e"   // TODO: both theaters
+    id: "C004", name: "Tidewater Militia", side: "csa", type: "inf", str: 2, theater: "e"   // TODO: both theaters
   },
   C005: {
     id: "C005", name: "La Belle Rebelle", side: "csa", type: "enigma"
@@ -33,36 +33,36 @@ BVG.Lookup.Cards.csa = {
     special: "Won't subordinate. May be returned to your hand during Step 1 or Step 2, even if replaced, (unless sacked or wounded)."
   },
   C007: {
-    id: "C007", name: "Pickett", side: "csa", type: "inf", str: "2", theater: "e"
+    id: "C007", name: "Pickett", side: "csa", type: "inf", str: 2, theater: "e"
   },
   C008: {
     id: "C008", name: "J Johnston", side: "csa", type: "ldr", str: 2, ainit: 1, dinit: 2, acap: 3, ccap: 0, scap: 3, wontsub: true, politics: "d",
     special: "Won't subordinate, except to Beauregard."
   },
   C009: {
-    id: "C009", name: "Stonewall", side: "csa", type: "inf", str: "2", theater: "e"
+    id: "C009", name: "Stonewall", side: "csa", type: "inf", str: 2, theater: "e"
   },
   C010: {
-    id: "C010", name: "Ewell", side: "csa", type: "inf", str: "2", theater: "e"
+    id: "C010", name: "Ewell", side: "csa", type: "inf", str: 2, theater: "e"
   },
   C011: {
-    id: "C011", name: "Lovell", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C011", name: "Lovell", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C012: {
-    id: "C012", name: "Pillow", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C012", name: "Pillow", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C013: {
-    id: "C013", name: "Cheatham", side: "csa", type: "inf", str: "2", theater: "w"
+    id: "C013", name: "Cheatham", side: "csa", type: "inf", str: 2, theater: "w"
   },
   C014: {
     id: "C014", name: "A Johnston", side: "csa", type: "ldr", str: 4, ainit: 1, dinit: 1, acap: 3, ccap: 0, scap: 0, wontsub: true, politics: "f",
     special: "Won't subordinate."
   },
   C015: {
-    id: "C015", name: "Cleburne", side: "csa", type: "inf", str: "3", theater: "w"
+    id: "C015", name: "Cleburne", side: "csa", type: "inf", str: 3, theater: "w"
   },
   C016: {
-    id: "C016", name: "Buckner", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C016", name: "Buckner", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C017: {
     id: "C017", name: "Polk", side: "csa", type: "ldr", str: 1, ainit: 0, dinit: 0, acap: 0, ccap: 2, scap: 2, politics: "f"
@@ -81,13 +81,13 @@ BVG.Lookup.Cards.csa = {
     special: "Can rejoin a command to defend."
   },
   C022: {
-    id: "C022", name: "D H Hill", side: "csa", type: "inf", str: "2", theater: "e"
+    id: "C022", name: "D H Hill", side: "csa", type: "inf", str: 2, theater: "e"
   },
   C023: {
     id: "C023", name: "Hardee", side: "csa", type: "ldr", str: 2, ainit: 2, dinit: 2, acap: 0, ccap: 4, scap: 4
   },
   C024: {
-    id: "C024", name: "Hindman", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C024", name: "Hindman", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C025: {
     id: "C025", name: "Map H (CSA)", side: "csa", type: "map"
@@ -100,13 +100,13 @@ BVG.Lookup.Cards.csa = {
     id: "C027", name: "Map F (CSA)", side: "csa", type: "map"
   },
   C028: {
-    id: "C028", name: "Stewart", side: "csa", type: "inf", str: "2", theater: "w"
+    id: "C028", name: "Stewart", side: "csa", type: "inf", str: 2, theater: "w"
   },
   C029: {
-    id: "C029", name: "Breckinridge", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C029", name: "Breckinridge", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C030: {
-    id: "C030", name: "McLaw", side: "csa", type: "inf", str: "1", theater: "e"
+    id: "C030", name: "McLaw", side: "csa", type: "inf", str: 1, theater: "e"
   },
   C031: {
     id: "C031", name: "Map C (CSA)", side: "csa", type: "map"
@@ -115,13 +115,13 @@ BVG.Lookup.Cards.csa = {
     id: "C032", name: "Magruder", side: "csa", type: "ldr", str: 0, ainit: 0, dinit: 0, acap: 0, ccap: 4, scap: 4, politics: "d"
   },
   C033: {
-    id: "C033", name: "Anderson", side: "csa", type: "inf", str: "2", theater: "e"
+    id: "C033", name: "Anderson", side: "csa", type: "inf", str: 2, theater: "e"
   },
   C034: {
-    id: "C034", name: "A P Hill", side: "csa", type: "inf", str: "2", theater: "e"
+    id: "C034", name: "A P Hill", side: "csa", type: "inf", str: 2, theater: "e"
   },
   C035: {
-    id: "C035", name: "Hood", side: "csa", type: "inf", str: "3", theater: "e", // TODO: both theaters
+    id: "C035", name: "Hood", side: "csa", type: "inf", str: 3, theater: "e", // TODO: both theaters
     special: "Before CSA Late War, must take at least one step loss when attacking if the CSA suffers any losses."
   },
   C036: {
@@ -144,7 +144,7 @@ BVG.Lookup.Cards.csa = {
     id: "C041", name: "Longstreet", side: "csa", type: "ldr", str: 4, ainit: 1, dinit: 1, acap: 0, ccap: 5, scap: 5
   },
   C042: {
-    id: "C042", name: "Stevenson", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C042", name: "Stevenson", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C043: {
     id: "C043", name: "Price", side: "csa", type: "ldr", str: 0, ainit: 2, dinit: 2, acap: 0, ccap: 2, scap: 2
@@ -157,17 +157,17 @@ BVG.Lookup.Cards.csa = {
     id: "C045", name: "Stuart", side: "csa", type: "cav", str: 2, ainit: 1, dinit: 1
   },
   C046: {
-    id: "C046", name: "Heth", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C046", name: "Heth", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C047: {
-    id: "C047", name: "Ransom", side: "csa", type: "inf", str: "2", theater: "e"
+    id: "C047", name: "Ransom", side: "csa", type: "inf", str: 2, theater: "e"
   },
   C048: {
     id: "C048", name: "Van Dorn", side: "csa", type: "cav", str: 1, ainit: 2, dinit: 2,
     special: "Remove when CSA enters Late War."
   },
   C049: {
-    id: "C049", name: "Maury", side: "csa", type: "inf", str: "2", theater: "w"
+    id: "C049", name: "Maury", side: "csa", type: "inf", str: 2, theater: "w"
   },
   C050: {
     id: "C050", name: "Pemberton", side: "csa", type: "ldr", str: 0, ainit: 1, dinit: 1, acap: 0, ccap: 3, scap: 3, // TODO: verify
@@ -178,16 +178,16 @@ BVG.Lookup.Cards.csa = {
     special: "Can't pair with Forrest."
   },
   C052: {
-    id: "C052", name: "Smith", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C052", name: "Smith", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C053: {
-    id: "C053", name: "Loring", side: "csa", type: "inf", str: "2", theater: "w"
+    id: "C053", name: "Loring", side: "csa", type: "inf", str: 2, theater: "w"
   },
   C054: {
-    id: "C054", name: "Forney", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C054", name: "Forney", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C055: {
-    id: "C055", name: "Bowen", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C055", name: "Bowen", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C056: {
     id: "C056", name: "Ewell", side: "csa", type: "ldr", str: 1, ainit: 1, dinit: 1, acap: 0, ccap: 3, scap: 3
@@ -199,10 +199,10 @@ BVG.Lookup.Cards.csa = {
     id: "C058", name: "A P Hill", side: "csa", type: "ldr", str: 1, ainit: 1, dinit: 1, acap: 0, ccap: 3, scap: 3
   },
   C059: {
-    id: "C059", name: "French", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C059", name: "French", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C060: {
-    id: "C060", name: "Walker", side: "csa", type: "inf", str: "2", theater: "w"
+    id: "C060", name: "Walker", side: "csa", type: "inf", str: 2, theater: "w"
   },
   C061: {
     id: "C061", name: "Draft Riots", side: "csa", type: "enigma"
@@ -217,7 +217,7 @@ BVG.Lookup.Cards.csa = {
     id: "C064", name: "Maury", side: "csa", type: "ldr", str: 2, ainit: 1, dinit: 1, acap: 0, ccap: 2, scap: 2
   },
   C065: {
-    id: "C065", name: "Preston", side: "csa", type: "inf", str: "1", theater: "w"
+    id: "C065", name: "Preston", side: "csa", type: "inf", str: 1, theater: "w"
   },
   C066: {
     id: "C066", name: "Partisan Rangers", side: "csa", type: "enigma"
@@ -241,10 +241,10 @@ BVG.Lookup.Cards.csa = {
     id: "C072", name: "Early", side: "csa", type: "ldr", str: 1, ainit: 2, dinit: 1, acap: 0, ccap: 3, scap: 3
   },
   C073: {
-    id: "C073", name: "Walthall", side: "csa", type: "inf", str: "2", theater: "w"
+    id: "C073", name: "Walthall", side: "csa", type: "inf", str: 2, theater: "w"
   },
   C074: {
-    id: "C074", name: "Hoke", side: "csa", type: "inf", str: "1", theater: "e"
+    id: "C074", name: "Hoke", side: "csa", type: "inf", str: 1, theater: "e"
   },
   C075: {
     id: "C075", name: "Anderson", side: "csa", type: "ldr", str: 2, ainit: 1, dinit: 1, acap: 0, ccap: 2, scap: 2
@@ -256,7 +256,7 @@ BVG.Lookup.Cards.csa = {
     id: "C077", name: "Stuart", side: "csa", type: "ldr", str: 2, ainit: 1, dinit: 1, acap: 0, ccap: 3, scap: 3
   },
   C078: {
-    id: "C078", name: "Gordon", side: "csa", type: "inf", str: "2", theater: "e"
+    id: "C078", name: "Gordon", side: "csa", type: "inf", str: 2, theater: "e"
   },
   C079: {
     id: "C079", name: "Cheatham", side: "csa", type: "ldr", str: 2, ainit: 1, dinit: 1, acap: 0, ccap: 3, scap: 3
