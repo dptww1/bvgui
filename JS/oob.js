@@ -43,16 +43,60 @@ function drawCard(side) {
     activateCard(side + "Hand", id);
 }
 
+function findTopLevelLeader(startElt) {
+    var top = (startElt != null && startElt.hasClassName("ldr")) ? startElt : null;
+    for (var elt = startElt; elt != null; elt = elt.up("li")) {
+        if (elt.hasClassName("ldr")) {
+            top = elt;
+        }
+    }
+    return top;
+}
+
 function dropCard(dropElt, dragElt) {
+    // Remember the old top-level leader
+    var oldParentElt = findTopLevelLeader(dragElt);
+
     dragElt.remove();
+
+    // Recompute the old parent element, unless it's the dragged element itself
+    if (oldParentElt !== dragElt) {
+        computeRollupStrength(oldParentElt);
+    }
+
     dragElt.setStyle( { left: 0, top: 0 } );
     dropElt.down("ul").appendChild(dragElt);
+
     if (dropElt.hasClassName("unstacks")) {
         dragElt.select("li").each( function(childElt) { dropCard(dropElt, childElt); } );
     }
+
+    // Recompute the strength of the top level leader incorporating the dragged element, even
+    // if the latter *is* a top level leader.
+    computeRollupStrength(findTopLevelLeader(dragElt));
 }
 
 var activeDropTargets = $A();
+
+function computeRollupStrength(elt) {
+    if (elt == null) {
+        return;
+    }
+
+    if (!elt.hasClassName("ldr")) {
+        debugger;
+    }
+
+    var cs = parseInt(elt.down(".strength").textContent, 10);  // TODO: textContent vs innerText vs innerHTML
+    var initCs = cs;
+    elt.select("li").each( function(childElt) {
+        var card = BVG.Lookup.findCardById(childElt.id);
+        if (card.str) {
+            cs += card.str;
+        }
+    });
+    elt.down(".rollupStrength").update(cs > initCs ? "(" + cs + ")" : "");
+}
 
 function createDropTargets(o, event) {
     var ids = $A(BVG.Server.getDropTargets(o.element.id));
@@ -82,10 +126,8 @@ function activateCard(parent, id) {
     syncContainers();
     new Effect.BlindDown(cardNode, { duration: 0.15 } );
     // after DOM element is added into document, it's safe to make tooltip
-    if (card.special) {
-        new Tooltip(card.id, "SPECIAL: " + card.special);
-    }
-
+    BVG.DomUtil.activateToolTip(card);
+    computeRollupStrength(findTopLevelLeader(cardNode));
 }
 
 function setupSubtree(parentId, childHash) {
@@ -96,7 +138,9 @@ function setupSubtree(parentId, childHash) {
             setupSubtree(childId, childHash[childId]);
 
         } else { // key's value is a number, telling whether the card is at full strength (1) or not (0)
-
+            if (parseInt(childHash[childId], 10) != 1) {
+                $(childId).addClassName("depleted");
+            }
         }
     });
 }

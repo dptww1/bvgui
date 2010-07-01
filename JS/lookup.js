@@ -351,7 +351,7 @@ BVG.Lookup.Cards.usa = {
     id: "U024", name: "III Corps", side: "usa", type: "inf", str: 3, theater: "e"
   },
   U026: {
-      id: "U026", name: "Map F (USA)", side: "usa", type: "map"
+    id: "U026", name: "Map F (USA)", side: "usa", type: "map"
   },
   U027: {
     id: "U027", name: "IV Corps", side: "usa", type: "inf", str: 3, theater: "e",
@@ -367,7 +367,7 @@ BVG.Lookup.Cards.usa = {
     id: "U030", name: "VI Corps", side: "usa", type: "inf", str: 5, theater: "e"
   },
   U031: {
-      id: "U031", name: "Map J (USA)", side: "usa", type: "map"
+    id: "U031", name: "Map J (USA)", side: "usa", type: "map"
   },
   U032: {
     id: "U032", name: "Butler", side: "usa", type: "ldr", str: 1, ainit: 1, dinit: 1, acap: 0, ccap: 2, scap: 2
