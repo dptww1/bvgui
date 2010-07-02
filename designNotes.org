@@ -1,15 +1,22 @@
 * UI Buildout Steps
-** Tooltips with special rules
-** Top-level leaders should show force strength total
-** leaders moved to cadre should have their subordinates (recusively) rooted to cadre, too
 ** Context Menus
+|-------------------|
+| Flip              |
+|-------------------|
+| Deplete           |
+| Restore           |
+|-------------------|
+| Discard           |
+|-------------------|
+| Trans-Mississippi |
+|-------------------|
+
 *** Flip
+-------
 *** Deplete
 *** Restore
 *** Discard (or is this a drag-n-drop?)
-*** Send to Trans-Mississippi (or is this a drag-n-drop)
-
-** add USA East, make layout horizontal instead of vertical
+*** Send to Trans-Mississippi (or is this a drag-n-drop?)
 
 * Fields
 
@@ -33,7 +40,6 @@ Lookup/Constants
 | politics | -   | -   | X   | -   | -   | -    | String  | "f" = Political Favor, "d" = Political Disfavor |
 | latewar  | X   | X   | X   | X   | -   | X    | Boolean | true = Late War card, false = not Late War      |
 | wontsub  | X   | -   | X   | -   | -   | -    | Boolean | true = wont subordinate, false = will           |
-| twosteps | X   | X   | -   | -   | -   | -    | Boolean | true = depletable, false = only one step        |
 |----------+-----+-----+-----+-----+-----+------+---------+-------------------------------------------------|
 
 Dynamic Fields
