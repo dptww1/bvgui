@@ -14,6 +14,7 @@
 <script src="JS/oob.js"></script>
 <script src="JS/domutil.js"></script>
 <script src="JS/server.js"></script>
+<script src="JS/state.js"></script>Xb
 
 </head>
 <body>
@@ -32,7 +33,6 @@ is straight out of 1999.
 <form name="f" action="post">
 <button id="loadGame" type="button">Load Game</button> (Doesn't really "Load", just sets up a semi-complex position)
 </form>
-
 
 <div id="usa">
   <div id="usaHand" class="unstacks column">
@@ -84,6 +84,12 @@ is straight out of 1999.
 
 <br clear="left">
 
+<p><b>New since 2010-07-01</b>
+<ul>
+    <li>Context menus
+    <li>Rollup strength accounts for depletion
+</ul>
+    
 <p><b>New since 2010-06-29</b>
 <ul>
     <li>Tooltips are confined to the card name (instead of the entire list item including subordinates)
@@ -114,10 +120,9 @@ is straight out of 1999.
       
 <p><b>TODO</b>
 <ul>
+    <li>Moving a card to Hand or Cadre should restore it (and context menu Deplete/Restore should be unavailable)
     <li>User is CSA/USA/Neither, can't drag/menu unowned cards
-    <li>Context menus
     <li>How to represent flipped unit/groups?
-    <li>Rollup strength needs to account for depletion
     <li>Add logging
 <ul>
       

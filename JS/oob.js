@@ -71,12 +71,12 @@ function dropCard(dropElt, dragElt) {
         dragElt.select("li").each( function(childElt) { dropCard(dropElt, childElt); } );
     }
 
+    var newParentElt = findTopLevelLeader(dragElt);
+
     // Recompute the strength of the top level leader incorporating the dragged element, even
     // if the latter *is* a top level leader.
-    computeRollupStrength(findTopLevelLeader(dragElt));
+    computeRollupStrength(newParentElt);
 }
-
-var activeDropTargets = $A();
 
 function computeRollupStrength(elt) {
     if (elt == null) {
@@ -91,12 +91,12 @@ function computeRollupStrength(elt) {
     var initCs = cs;
     elt.select("li").each( function(childElt) {
         var card = BVG.Lookup.findCardById(childElt.id);
-        if (card.str) {
-            cs += card.str;
-        }
+        cs += BVG.State.isDepleted(childElt.id) ? card.depstr : card.str;
     });
     elt.down(".rollupStrength").update(cs > initCs ? "(" + cs + ")" : "");
 }
+
+var activeDropTargets = $A();
 
 function createDropTargets(o, event) {
     var ids = $A(BVG.Server.getDropTargets(o.element.id));
@@ -134,23 +134,24 @@ function setupSubtree(parentId, childHash) {
     $H(childHash).keys().each( function(childId) {
         activateCard(parentId, childId);
 
-        if (typeof childHash[childId] == "object") {  // if the key's value is an object, it's a hash of subordinates
+        if (typeof childHash[childId] === "object") {  // if the key's value is an object, it's a hash of subordinates
             setupSubtree(childId, childHash[childId]);
 
         } else { // key's value is a number, telling whether the card is at full strength (1) or not (0)
-            if (parseInt(childHash[childId], 10) != 1) {
-                $(childId).addClassName("depleted");
+            if (parseInt(childHash[childId], 10) !== 1) {
+                BVG.State.deplete(childId);
             }
         }
     });
 }
 
 function setupGame(game) {
+    BVG.State.initialize();
+
     $$(".oobRoot li").each( function(elt) { elt.remove(); } );
     $H(game).keys().each( function(id) {
         setupSubtree(id, game[id]);
     });
-
 }
 
 function loadGame() {
@@ -164,18 +165,69 @@ function domLoaded() {
 //  new SplitPane("usaWest" , 16, "usaEast", 32, 16, { active: true } );
 
   var game = BVG.Server.newGame().evalJSON();
-    setupGame(game);
+  setupGame(game);
 
   $("usaDrawCardLink").href = "javascript:drawCard('usa')";
   $("csaDrawCardLink").href = "javascript:drawCard('csa')";
 
   new Proto.Menu({
-      selector: ".inf",
+      selector: ["#usa", "#csa"],
       className: "menu desktop",
-      menuItems: [
-          { name: '[-] Deplete' },
-          { name: '[+] Restore' }
-      ]
+      beforeShow: function(e) {
+          var elt = e.element();
+          if (elt.tagName !== "LI") {  // event target might be child of the card node
+              elt = elt.up("li");
+          }
+
+          // Turn off all menus, until proven otherwise
+          this.menuItems.each( function(item) {
+              if (!item.separator) {
+                  BVG.DomUtil.setMenuItemState($$("li > a[title='" + item.name + "']")[0], false);
+              }
+          });
+
+          if (elt == null) {
+              e.stop();
+              return;
+          }
+
+          var card = BVG.Lookup.findCardById(elt.id);
+
+          // Only inf/cav/ldr are flippable, and then only in west/east/cadre
+          BVG.DomUtil.setMenuItemState($$("li > a[title='Flip']")[0], $A(["inf", "cav", "ldr"]).include(card.type));
+
+          // Only undepleted units with a depleted strength are depletable (TODO)
+          BVG.DomUtil.setMenuItemState($$("li > a[title='Deplete']")[0], typeof(card.depstr) === "number" && !BVG.State.isDepleted(elt.id));
+
+          // Only depleted units are restorable (TODO)
+          BVG.DomUtil.setMenuItemState($$("li > a[title='Restore']")[0], BVG.State.isDepleted(elt.id));
+      },
+      menuItems: $A([
+          { name: 'Flip' },
+          { separator: true },
+          {
+              name: 'Deplete',
+              callback: function(ev) {
+                  var elt = ev.element();
+                  if (elt.tagName !== "LI") {
+                      elt = elt.up("li");
+                  }
+                  BVG.State.deplete(elt.id);
+                  computeRollupStrength(findTopLevelLeader(elt));
+              }
+          },
+          {
+              name: 'Restore',
+              callback: function(ev) {
+                  var elt = ev.element();
+                  if (elt.tagName !== "LI") {
+                      elt = elt.up("li");
+                  }
+                  BVG.State.restore(elt.id);
+                  computeRollupStrength(findTopLevelLeader(elt));
+              }
+          }
+      ])
   });
 }
 

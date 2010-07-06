@@ -268,10 +268,10 @@ BVG.Lookup.Cards.csa = {
 
 BVG.Lookup.Cards.usa = {
   U001: {
-      id: "U001", name: "Map A (USA)", side: "usa", type: "map"
+    id: "U001", name: "Map A (USA)", side: "usa", type: "map"
   },
   U002: {
-      id: "U002", name: "Map B (USA)", side: "usa", type: "map"
+    id: "U002", name: "Map B (USA)", side: "usa", type: "map"
   },
   U003: {
     id: "U003", name: "The Devil's Own Luck", side: "usa", type: "enigma"
@@ -303,7 +303,7 @@ BVG.Lookup.Cards.usa = {
     special: "Won't subordinate."
   },
   U012: {
-      id: "U012", name: "Map C (neutral)", side: "usa", type: "map"
+    id: "U012", name: "Map C (neutral)", side: "usa", type: "map"
   },
   U013: {
     id: "U013", name: "Banks", side: "usa", type: "ldr", str: 0, ainit: 1, dinit: 1, acap: 0, ccap: 3, scap: 3, wontsub: true,
@@ -339,7 +339,7 @@ BVG.Lookup.Cards.usa = {
     id: "U021", name: "XV Corps", side: "usa", type: "inf", str: 5, depstr: 2, theater: "w"
   },
   U022: {
-      id: "U022", name: "Map H (USA)", side: "usa", type: "map"
+    id: "U022", name: "Map H (USA)", side: "usa", type: "map"
   },
   U023: {
     id: "U023", name: "Monitor", side: "usa", type: "enigma"
@@ -481,7 +481,7 @@ BVG.Lookup.Cards.usa = {
     id: "U065", name: "The Freedom Sickness", side: "usa", type: "enigma"
   },
   U066: {
-      id: "U066", name: "Map K (USA)", side: "usa", type: "map"
+    id: "U066", name: "Map K (USA)", side: "usa", type: "map"
   },
   U067: {
     id: "U067", name: "McPherson", side: "usa", type: "ldr", str: 2, ainit: 1, dinit: 1, acap: 0, ccap: 5, scap: 3, latewar: true

@@ -79,6 +79,27 @@ BVG.DomUtil = function() {
             if (card.special) {
                 new Tooltip($(card.id).down("span.toolTippedText"), "SPECIAL: " + card.special);
             }
+        },
+
+        /*
+         * Since we're sharing a single menu amongst all the cards, we need to dynamically change item state
+         * based on the type and/or state of the underlying card.  However, Proto.Menu's design forces us to
+         * decide at construction time whether a menu item is enabled or not.
+         *
+         * Maybe the solution is to construct menus at onclick time?
+         *
+         * But until I find a better solution, we'll update the item *elements* as opposed to the Proto.Menu menu
+         * item *structures*.  Let's isolate the logic needed to do that here.
+         */
+        setMenuItemState: function(itemElt, enabled) {
+            var e = $(itemElt);
+            if (enabled) {
+                e.removeClassName("disabled");
+                e.addClassName("enabled");
+            } else {
+                e.addClassName("disabled");
+                e.removeClassName("enabled");
+            }
         }
     };
 }();
