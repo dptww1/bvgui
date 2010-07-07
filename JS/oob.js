@@ -35,12 +35,19 @@ function syncContainers() {
 }
 
 function drawCard(side) {
-    var id = BVG.Server.drawCard(side).evalJSON();
-    if (id == null) {
-        alert("Deck is empty!");
-        return;
+    var json = BVG.Server.drawCard(side).evalJSON();
+    if (json.type == "drawCard") {
+        var id = json.cardId;
+        if (id == null) {
+            alert("Deck is empty!");
+            return;
+        }
+
+        activateCard(side + "Hand", id);
+
+    } else {
+        debugger;
     }
-    activateCard(side + "Hand", id);
 }
 
 function findTopLevelLeader(startElt) {
@@ -208,7 +215,7 @@ function domLoaded() {
           {
               name: 'Deplete',
               callback: function(ev) {
-                  var elt = DomUtil.findCardElt(ev);
+                  var elt = BVG.DomUtil.findCardElt(ev);
                   BVG.State.deplete(elt.id);
                   computeRollupStrength(findTopLevelLeader(elt));
               }
@@ -216,7 +223,7 @@ function domLoaded() {
           {
               name: 'Restore',
               callback: function(ev) {
-                  var elt = DomUtil.findCardElt(ev);
+                  var elt = BVG.DomUtil.findCardElt(ev);
                   BVG.State.restore(elt.id);
                   computeRollupStrength(findTopLevelLeader(elt));
               }

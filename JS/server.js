@@ -21,6 +21,7 @@ if (!BVG) { BVG = {}; }
  * }
  */
 BVG.Server = function() {
+    var gameEventId = 1;
     var drawPile = {
         usa: [],
         csa: []
@@ -42,7 +43,9 @@ BVG.Server = function() {
         });
     };
 
-    var initDrawPile = function(gameState) {
+    var initGame = function(gameState) {
+        gameEventId = 1;
+
         // Figure out which cards are already in play, so don't belong in the draw pile
         var inPlay = {};
         markInPlay(inPlay, gameState);
@@ -63,7 +66,21 @@ BVG.Server = function() {
     };
 
     return {
-        drawCard: function(side) { return Object.toJSON(drawPile[side].pop()); },
+        drawCard: function(side) {
+            return Object.toJSON({
+                type:      "drawCard",
+                cardId:    drawPile[side].pop(),
+                gameEvent: {
+                    side:    side,
+                    id:      gameEventId++,
+                    canUndo: true
+                }
+            });
+        },
+
+        moveCard: function(side, cardId, fromId, toID, canUndo) {
+
+        },
 
         loadGame: function() {
             var gameState = $H({
@@ -92,7 +109,7 @@ BVG.Server = function() {
                 })
             });
 
-            initDrawPile(gameState);
+            initGame(gameState);
             return Object.toJSON(gameState);
         },
 
@@ -102,7 +119,7 @@ BVG.Server = function() {
                 csaHand: $H({ C001: 1, C002: 1, C003: 1, C004: 1 })
             });
 
-            initDrawPile(gameState);
+            initGame(gameState);
 
             return Object.toJSON(gameState);
         },
