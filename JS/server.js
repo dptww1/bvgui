@@ -1,5 +1,25 @@
 if (!BVG) { BVG = {}; }
 
+/*
+ * Interface to game server.  This is a client-side implementation mock for UI development
+ * purposes; eventually it will be swapped out for a implementation that uses true HTTP
+ * calls in its methods.
+ *
+ * The methods here can use regular JS parameters because they are responsible for creating
+ * the underlying HTTP requests.  The return values from these methods will be JSON hashes.
+ * The keys and values in those hashes will be specific to the method call, but all returned
+ * hashes will include the following:
+ *
+ * key: "type"
+ * value: "moveCard", "newGame", "endTurn", etc
+ *
+ * key: "gameEvent"
+ * value: {
+ *     side:    "usa" or "csa",
+ *     id:      1..n
+ *     canUndo: true or false
+ * }
+ */
 BVG.Server = function() {
     var drawPile = {
         usa: [],
@@ -64,7 +84,7 @@ BVG.Server = function() {
                 csaWest: $H({
                     C038: $H({
                         C058: $H({ C028: 1 }),
-                        C039: $H({ C049: 1 }),
+                        C039: $H({ C042: 1 }),
                         C018: $H({ C049: 1 }),
                         C044: 1
                     }),
@@ -76,11 +96,6 @@ BVG.Server = function() {
             return Object.toJSON(gameState);
         },
 
-        // Returns: {
-        //    usaHand: ["U001", "U002"],
-        //    usaWest: ["U019"]
-        //    ...
-        // };
         newGame: function() {
             var gameState = $H({
                 usaHand: $H({ U001: 1, U002: 1, U003: 1, U004: 1, U005: 1 }),
