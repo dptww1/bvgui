@@ -8,7 +8,7 @@ BVG.DomUtil = function() {
     var _mkClassName = function(card) {
         var classes = [card.side, card.type];
 
-        if (card.ainit) {
+        if (card.acap) {
             classes.push("ldr_oc");
         }
 
@@ -79,6 +79,17 @@ BVG.DomUtil = function() {
             if (card.special) {
                 new Tooltip($(card.id).down("span.toolTippedText"), "SPECIAL: " + card.special);
             }
+        },
+
+        /**
+         * Returns the card targeted by the given event; might be null.
+         */
+        findCardElt: function(event) {
+            var elt = event.element();
+            if (elt.tagName !== "LI") {
+                elt = elt.up("li");
+            }
+            return elt;
         },
 
         /*

@@ -193,13 +193,13 @@ function domLoaded() {
 
           var card = BVG.Lookup.findCardById(elt.id);
 
-          // Only inf/cav/ldr are flippable, and then only in west/east/cadre
+          // Only inf/cav/ldr are flippable, and then only in west/east/cadre (TODO)
           BVG.DomUtil.setMenuItemState($$("li > a[title='Flip']")[0], $A(["inf", "cav", "ldr"]).include(card.type));
 
-          // Only undepleted units with a depleted strength are depletable (TODO)
+          // Only undepleted units with a depleted strength are depletable
           BVG.DomUtil.setMenuItemState($$("li > a[title='Deplete']")[0], typeof(card.depstr) === "number" && !BVG.State.isDepleted(elt.id));
 
-          // Only depleted units are restorable (TODO)
+          // Only depleted units are restorable
           BVG.DomUtil.setMenuItemState($$("li > a[title='Restore']")[0], BVG.State.isDepleted(elt.id));
       },
       menuItems: $A([
@@ -208,10 +208,7 @@ function domLoaded() {
           {
               name: 'Deplete',
               callback: function(ev) {
-                  var elt = ev.element();
-                  if (elt.tagName !== "LI") {
-                      elt = elt.up("li");
-                  }
+                  var elt = DomUtil.findCardElt(ev);
                   BVG.State.deplete(elt.id);
                   computeRollupStrength(findTopLevelLeader(elt));
               }
@@ -219,10 +216,7 @@ function domLoaded() {
           {
               name: 'Restore',
               callback: function(ev) {
-                  var elt = ev.element();
-                  if (elt.tagName !== "LI") {
-                      elt = elt.up("li");
-                  }
+                  var elt = DomUtil.findCardElt(ev);
                   BVG.State.restore(elt.id);
                   computeRollupStrength(findTopLevelLeader(elt));
               }
