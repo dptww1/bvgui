@@ -78,6 +78,10 @@ function dropCard(dropElt, dragElt) {
         dragElt.select("li").each( function(childElt) { dropCard(dropElt, childElt); } );
     }
 
+    if (dropElt.hasClassName("undepletes") && BVG.State.isDepleted(dragElt.id)) {
+        BVG.State.restore(dragElt.id);
+    }
+
     var newParentElt = findTopLevelLeader(dragElt);
 
     // Recompute the strength of the top level leader incorporating the dragged element, even
@@ -98,7 +102,7 @@ function computeRollupStrength(elt) {
     var initCs = cs;
     elt.select("li").each( function(childElt) {
         var card = BVG.Lookup.findCardById(childElt.id);
-        cs += BVG.State.isDepleted(childElt.id) ? card.depstr : card.str;
+        cs += BVG.State.isFlipped(childElt.id) ? 0 : BVG.State.isDepleted(childElt.id) ? card.depstr : card.str;
     });
     elt.down(".rollupStrength").update(cs > initCs ? "(" + cs + ")" : "");
 }
@@ -193,8 +197,7 @@ function domLoaded() {
               }
           });
 
-          if (elt == null) {
-              e.stop();
+          if (elt === undefined) {
               return;
           }
 
@@ -203,14 +206,24 @@ function domLoaded() {
           // Only inf/cav/ldr are flippable, and then only in west/east/cadre (TODO)
           BVG.DomUtil.setMenuItemState($$("li > a[title='Flip']")[0], $A(["inf", "cav", "ldr"]).include(card.type));
 
-          // Only undepleted units with a depleted strength are depletable
-          BVG.DomUtil.setMenuItemState($$("li > a[title='Deplete']")[0], typeof(card.depstr) === "number" && !BVG.State.isDepleted(elt.id));
+          // Only undepleted units in an active area with a depleted strength are depletable
+          BVG.DomUtil.setMenuItemState($$("li > a[title='Deplete']")[0],
+                                       typeof(card.depstr) === "number" &&
+                                       !BVG.State.isDepleted(elt.id) &&
+                                       elt.up("div." + card.side + "Active") !== undefined);
 
           // Only depleted units are restorable
           BVG.DomUtil.setMenuItemState($$("li > a[title='Restore']")[0], BVG.State.isDepleted(elt.id));
       },
       menuItems: $A([
-          { name: 'Flip' },
+          {
+              name: 'Flip',
+              callback: function(ev) {
+                  var elt = BVG.DomUtil.findCardElt(ev);
+                  BVG.State.flip(elt.id);
+                  computeRollupStrength(findTopLevelLeader(elt));
+              }
+          },
           { separator: true },
           {
               name: 'Deplete',

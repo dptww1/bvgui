@@ -8,13 +8,15 @@ BVG.State = function() {
      * Used as a set.  Index by card id.
      */
     var depletions = null;
+    var flips      = null;
 
     return {
         /*
          * Initializes all changeable game state.
          */
         initialize: function() {
-            depletions = $H({});
+            depletions = $H();
+            flips      = $H();
         },
 
         /**
@@ -22,10 +24,13 @@ BVG.State = function() {
          */
         deplete: function(id) {
             var card = BVG.Lookup.findCardById(id);
-            if (!card.depstr)
+            if (typeof(card.depstr) == "undefined") {
                 throw "tried to deplete a undepletable card " + id;
-            if (depletions.get(id))
+            }
+            if (depletions.get(id)) {
                 throw "tried to deplete an already-depleted card " + id;
+            }
+
             depletions.set(id, 1);
             $(id).addClassName("depleted");
         },
@@ -46,6 +51,26 @@ BVG.State = function() {
          */
         isDepleted: function(id) {
             return depletions.get(id) === 1;
+        },
+
+        /**
+         * Toggles the flip state of the given card.
+         */
+        flip: function(id) {
+            if (this.isFlipped(id)) {
+                flips.unset(id);
+                $(id).removeClassName("flipped");
+            } else { // not flipped
+                flips.set(id, 1);
+                $(id).addClassName("flipped");
+            }
+        },
+
+        /**
+         * Determines if given card if flipped or not.
+         */
+        isFlipped: function(id) {
+            return flips.get(id) === 1;
         }
     };
 }();

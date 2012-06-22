@@ -11,13 +11,6 @@
 | Trans-Mississippi |
 |-------------------|
 
-*** Flip
--------
-*** Deplete
-*** Restore
-*** Discard (or is this a drag-n-drop?)
-*** Send to Trans-Mississippi (or is this a drag-n-drop?)
-
 * Fields
 
 Lookup/Constants
@@ -47,6 +40,7 @@ Dynamic Fields
 | Name     | Inf | Cav | Ldr | Nav | Enig | Type    | Comments                              |
 |----------+-----+-----+-----+-----+------+---------+---------------------------------------|
 | depleted | X   | X   | -   | -   | -    | Boolean | true = depleted, false = not depleted |
+| flipped  | X   | X   | X   | X   | -    | Boolean | true = flipped, false = not flipped   |
 |----------+-----+-----+-----+-----+------+---------+---------------------------------------|
   
 * DOM Node ID Naming convention
@@ -55,11 +49,52 @@ Dynamic Fields
 |  Idx | Values                                |
 |------+---------------------------------------|
 |    0 | U = USA, C = CSA                      |
-| 1..2 | Card #                                |
-|    1 | I = Infantry, C = Cavalry, L = Leader |
-|    2 | 1..5  Strength                        |
-|    3 | 0..2 Attack Initiative                |
-|    4 | 0..2 Defense Initiative               |
-|      |                                       |
+| 1..3 | Card #                                |
 |------+---------------------------------------|
 
+* Possible State Changes
+
+** DRAW CARD
+    Server.drawCard(side): draws a card, decrements supply, updates deck stats
+    => [ { action: "drawCard", side: "usa", id: "U040", deck: [13, 5, 1] }, // [cardsLeft, #LateWar, #before1864Elections]
+         { action: "updateSupply", side: "usa", supply: 2 } ]
+
+** MOVE CARD
+    Server.moveCard(side, id, to): reparents card, might (un)flip and/or (un)deplete and/or unstack
+    => [ { action: "moveCard", side: "usa", id: "U040", oldParent: "usaHand", newParent: "usaWest" }
+         { action: "flip", side: "usa", id: "U040" },
+         { action: "deplete", side: "usa", id: "U40" } ]
+
+** FLIP CARD
+    Server.flip(side, id): might flip subordinates or commander, too
+    => [ { action: "flip", side: "usa", id: "U040" },
+         { action: "flip", side: "usa", id: "U041" } ]
+** UNFLIP CARD
+    Server.unflip(side, id): might flip subordinates or commander, too
+    => [ { action: "flip", side: "usa", id: "U040" },
+         { action: "flip", side: "usa", id: "U041" } ]
+
+** DEPLETE CARD
+
+** RESTORE CARD
+
+** BEGIN BATTLE
+
+** RESOLVE BATTLE
+
+** SEND MESSAGE
+
+** END TURN
+
+** UNDO
+
+** LOAD GAME
+
+** NEW GAME
+
+** REASSIGN PLAYERS
+
+** MANUALLY SET SUPPLY (Just in Case)
+   - (Client) User
+
+** ROLL DIE (Just in Case)

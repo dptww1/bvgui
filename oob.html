@@ -35,7 +35,7 @@ is straight out of 1999.
 </form>
 
 <div id="usa">
-  <div id="usaHand" class="unstacks column">
+  <div id="usaHand" class="unstacks undepletes column">
     <p class="title">USA Hand</p>
     <a href="#" id="usaDrawCardLink">Draw Card</a>
     <ul class="oobRoot"></ul>
@@ -51,7 +51,7 @@ is straight out of 1999.
     <ul class="oobRoot"></ul>
   </div>
     
-  <div id="usaCadre" class="unstacks column">
+  <div id="usaCadre" class="unstacks undepletes column">
     <p class="title">USA Cadre</p>
       <ul class="oobRoot"></ul>
   </div>
@@ -60,7 +60,7 @@ is straight out of 1999.
 <br clear="left">
       
 <div id="csa">
-  <div id="csaHand" class="unstacks column">
+  <div id="csaHand" class="unstacks undepletes column">
     <p class="title">CSA Hand</p>
       <a href="#" id="csaDrawCardLink">Draw Card</a>
       <ul class="oobRoot"></ul>
@@ -76,7 +76,7 @@ is straight out of 1999.
       <ul class="oobRoot"></ul>
   </div>
 
-  <div id="csaCadre" class="unstacks column">
+  <div id="csaCadre" class="unstacks undepletes column">
     <p class="title">CSA Cadre</p>
       <ul class="oobRoot"></ul>
   </div>
@@ -84,6 +84,14 @@ is straight out of 1999.
 
 <br clear="left">
 
+<p><b>New since 2010-07-01</b>
+<ul>
+    <li>Flipping units works (though nested flips doesn't work correctly)
+    <li>Depletions are auto-removed in hand and cadre
+    <li>Can't deplete except in East/West
+    <li>Bug fix: Units with Depleted strength 0 are now depletable
+</ul>
+    
 <p><b>New since 2010-07-01</b>
 <ul>
     <li>Context menus
@@ -122,10 +130,8 @@ is straight out of 1999.
       
 <p><b>TODO</b>
 <ul>
-    <li>[Flip] doesn't do anything
-    <li>Moving a card to Hand or Cadre should restore it (and context menu Deplete/Restore should be unavailable)
+    <li>Context menu Flip should be unavailable when unit is in hand
     <li>User is CSA/USA/Neither, can't drag/menu unowned cards
-    <li>How to represent flipped unit/groups?
     <li>Add logging
 <ul>
       

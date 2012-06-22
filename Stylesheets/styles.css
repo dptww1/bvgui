@@ -101,6 +101,11 @@ body {
 
 li {
     cursor: pointer;
+
+    /* without these lines, flipped corps under a flipped leader is opacity^2 */
+    opacity: 1;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);  /* MS IE */
+    filter: alpha(opacity=100);
 }
 
 div.tooltip {
@@ -111,4 +116,10 @@ div.tooltip {
 
 .depleted {
     color: #a22;
+}
+
+.flipped {
+    opacity: .3;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=30);  /* MS IE */
+    filter: alpha(opacity=30);
 }
