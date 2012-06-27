@@ -1,20 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html> <head>
-<title>OOB</title>
-<link rel="stylesheet" href="Stylesheets/splitpane.css"      type="text/css">
-<link rel="stylesheet" href="Stylesheets/styles.css"         type="text/css">
-<link rel="stylesheet" href="Stylesheets/proto.menu.0.6.css" type="text/css"/>
+<title>Blue vs Gray New UI</title>
+<link rel="stylesheet" href="css/styles.css"                type="text/css">
+<link rel="stylesheet" href="css/splitpane.css"             type="text/css">
+<link rel="stylesheet" href="libcss/jquery.tooltip.css"     type="text/css">
+<link rel="stylesheet" href="libcss/jquery.contextmenu.css" type="text/css">
 
-<script src="LibJS/prototype.js"></script>
-<script src="LibJS/proto.menu.0.6.js"></script>
-<script src="LibJS/scriptaculous.js"></script>
-<script src="LibJS/tooltip-v0.2.js"></script>
+<script src="libjs/jquery-1.7.2.js"></script>
+<script src="libjs/jquery.tooltip.js"></script>
+<script src="libjs/jquery.contextmenu.js"></script>
+<script src="libjs/jquery-ui-1.8.21.custom.min.js"></script>
+<script src="libjs/underscore.js"></script>
 
-<script src="JS/lookup.js"></script>
-<script src="JS/oob.js"></script>
-<script src="JS/domutil.js"></script>
-<script src="JS/server.js"></script>
-<script src="JS/state.js"></script>
+<script src="js/ctxmenu.js"></script>
+<script src="js/lookup.js"></script>
+<script src="js/oob.js"></script>
+<script src="js/domutil.js"></script>
+<script src="js/server.js"></script>
+<script src="js/state.js"></script>
 
 </head>
 <body>
@@ -134,16 +137,11 @@ is straight out of 1999.
     <li>User is CSA/USA/Neither, can't drag/menu unowned cards
     <li>Add logging
 <ul>
-      
 
 <script type="text/javascript">
-document.observe("dom:loaded", domLoaded);
-$("loadGame").observe("click", loadGame);
+    jQuery(domLoaded);
+    $("#loadGame").bind("click", loadGame);
 </script>
-
-    
-
-
 
 </body>
 </html>

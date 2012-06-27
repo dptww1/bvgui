@@ -1,0 +1,24 @@
+Converting from PrototypeJS to JQuery:
+
+$A => []
+$H => {}
+
+hash.get("foo") => hash["foo"]
+
+var e = $("foo"); e.show(); => var e = $("foo"); $(e).show();
+
+$("someId") => $("#someId")
+$$("someClassName") => $("someClassName")
+
+.addClassName("foo") => .addClass("foo")
+.down("ul")          => .find("ul")[0]
+.each(function(elt)  => .each(function(idx, elt)
+.hasClassName        => .hasClass
+.href("someUrl")     => .attr("href", "someUrl")
+.removeClass("foo")  => .remove("foo")
+.select("selector")  => .find("selector")
+.up("li")            => .parent().closest("li")
+
+// ==== json2.js ====
+Object.evalJSON() => JSON.parse(o)
+Object.toJSON()   => JSON.stringify(o)
