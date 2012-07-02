@@ -135,31 +135,31 @@ BVG.Server = function() {
             switch (card.type) {
             case "inf":
                 // Generic containers
-                ids = ids.concat(["Hand", "West", "East", "Cadre"]).collect( function(str) { return side + str; } );
+                ids = ids.concat(_.collect(["Hand", "West", "East", "Cadre"], function(str) { return side + str; } ));
 
                 // Infantry can go to any friendly active leader
-                ids = ids.concat($("." + side + "Active .ldr").collect(idOf));
+                ids = ids.concat(_.collect($("." + side + "Active .ldr"), idOf));
                 break;
 
             case "cav":
                 // Generic containers
-                ids = ids.concat(["Hand", "West", "East", "Cadre"]).collect( function(str) { return side + str; } );
+                ids = ids.concat(_.collect(["Hand", "West", "East", "Cadre"], function(str) { return side + str; } ));
 
                 // Cavalry can go to any active top-level leader
-                ids = ids.concat($("." + side + "Active > .oobRoot > .ldr").collect(idOf));
+                ids = ids.concat(_.collect($("." + side + "Active > .oobRoot > .ldr"), idOf));
 
                 // Or to a top-level cavalry
-                ids = ids.concat($("." + side + "Active > .oobRoot > .cav").collect(idOf));
+                ids = ids.concat(_.collect($("." + side + "Active > .oobRoot > .cav"), idOf));
                 break;
 
             case "ldr":
                 // Generic containers
-                ids = ids.concat(["Hand", "West", "East", "Cadre"]).collect( function(str) { return side + str; } );
+                ids = ids.concat(_.collect(["Hand", "West", "East", "Cadre"], function(str) { return side + str; } ));
 
                 // WONTSUB leaders need no further processing, as they must be top-level.
                 // But if the leader will subordinate, then can go to any friendly active top-level leader
                 if (!card.wontsub) {
-                    ids = ids.concat($("." + side + "Active > .oobRoot > .ldr_oc").collect(idOf));
+                    ids = ids.concat(_.collect($("." + side + "Active > .oobRoot > .ldr_oc"), idOf));
                 }
 
                 break;
@@ -173,6 +173,7 @@ BVG.Server = function() {
                 break;
             }
 
+            //console.log("getDropTargets(" + eltId + ") = [" + ids.join(",") + "]");
             return ids;
         }
     };

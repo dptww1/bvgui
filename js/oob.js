@@ -60,29 +60,29 @@ function findTopLevelLeader(startElt) {
     return top;
 }
 
-function dropCard(dropElt, dragElt) {
-    // Remember the old top-level leader
-    var oldParentElt = findTopLevelLeader(dragElt);
+function dropCard(dropEltId, dragEltId) {
+    //console.log("dropCard(" + dropEltId + ", " + dragEltId + ")");
 
-    dragElt.remove();
+    // Remember the old top-level leader
+    var oldParentElt = findTopLevelLeader("#" + dragEltId);
+
+    $("#" + dragEltId).css( { left: 0, top: 0 } );
+    $($("#" + dropEltId).find("ul")[0]).append($("#" + dragEltId));
+
+    if ($("#" + dropEltId).hasClass("unstacks")) {
+        $("#" + dragEltId).find("li").each( function(idx, childElt) { dropCard(dropEltId, childElt.id); } );
+    }
+
+    if ($("#" + dropEltId).hasClass("undepletes") && BVG.State.isDepleted(dragEltId)) {
+        BVG.State.restore(dragEltId);
+    }
+
+    var newParentElt = findTopLevelLeader("#" + dragEltId);
 
     // Recompute the old parent element, unless it's the dragged element itself
-    if (oldParentElt !== dragElt) {
+    if (oldParentElt.id !== dragEltId) {
         computeRollupStrength(oldParentElt);
     }
-
-    dragElt.setStyle( { left: 0, top: 0 } );
-    dropElt.down("ul").appendChild(dragElt);
-
-    if ($(dropElt).hasClass("unstacks")) {
-        dragElt.select("li").each( function(childElt) { dropCard(dropElt, childElt); } );
-    }
-
-    if ($(dropElt).hasClass("undepletes") && BVG.State.isDepleted(dragElt.id)) {
-        BVG.State.restore(dragElt.id);
-    }
-
-    var newParentElt = findTopLevelLeader(dragElt);
 
     // Recompute the strength of the top level leader incorporating the dragged element, even
     // if the latter *is* a top level leader.
@@ -109,35 +109,43 @@ function computeRollupStrength(elt) {
 
 var activeDropTargets = [];
 
-function createDropTargets(o, event) {
-    var ids = $A(BVG.Server.getDropTargets(o.element.id));
-    ids.each( function(id) {
-        var elt = $(id);
-        Droppables.add(elt, {
-          constraint:  false,
-          dropOnEmpty: true,
-          hoverclass:  "okToDrop",
-          onDrop:      function(dragElt, dropElt, evtId) { dropCard(dropElt, dragElt); }
-        });
-        activeDropTargets.push(elt);
+function makeDraggable(card) {
+    $("#" + card.id).draggable( {
+        revert:         "invalid",
+        revertDuration: 250,
+        start:          createDropTargets,
+        stop:           clearDropTargets
+    } );
+}
+
+function createDropTargets(event, ui) {
+    var ids = BVG.Server.getDropTargets(event.target.id);
+    _.each(ids, function(id) {
+        $("#" + id).droppable( {
+            drop:       function(event, ui) { dropCard(event.target.id, ui.draggable[0].id); },
+            greedy:     true,
+            hoverClass: "okToDrop"
+        } );
+
+        activeDropTargets.push(id);
     });
 }
 
 function clearDropTargets(elt, event) {
-    activeDropTargets.each( function(elt) { Droppables.remove(elt); } );
-    activeDropTargets.clear();
+    _.each(activeDropTargets, function(id) { $($("#" + id)[0]).droppable("destroy"); } );
+    activeDropTargets = [];
 }
 
 function activateCard(parent, id) {
     var card = BVG.Lookup.findCardById(id);
     var container = $("#" + parent).find("ul")[0];
     var cardNode = BVG.DomUtil.mkCardNode(card);
-//TODO    new Draggable(cardNode, { revert: "failure", onStart: createDropTargets, onEnd: clearDropTargets } );  // TODO: combine with fn in domLoaded()
     $(container).append(cardNode);
     syncContainers();
-    $("#" + id).show();
+    $("#" + id).slideDown();
     // after DOM element is added into document, it's safe to make tooltip
     BVG.DomUtil.activateToolTip(card);
+    makeDraggable(card);
     BVG.CtxMenu.addTo("#" + card.id);
     computeRollupStrength(findTopLevelLeader($(container).children()[0]));
 }

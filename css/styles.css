@@ -114,8 +114,16 @@ div.tooltip {
     padding: 0.25em;
 }
 
+//.depleted:before {
+//    content: "(";
+//}
+
+//.depleted:after {
+//    content: "(-)";
+//}
+
 .depleted {
-    color: #a22;
+    text-decoration: underline;
 }
 
 .flipped {
