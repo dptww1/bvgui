@@ -14,6 +14,7 @@
 
 <script src="js/ctxmenu.js"></script>
 <script src="js/lookup.js"></script>
+<script src="js/logger.js"></script>
 <script src="js/oob.js"></script>
 <script src="js/domutil.js"></script>
 <script src="js/server.js"></script>
@@ -87,56 +88,17 @@ is straight out of 1999.
 
 <br clear="left">
 
-<p><b>New since 2010-07-01</b>
-<ul>
-    <li>Flipping units works (though nested flips doesn't work correctly)
-    <li>Depletions are auto-removed in hand and cadre
-    <li>Can't deplete except in East/West
-    <li>Bug fix: Units with Depleted strength 0 are now depletable
-</ul>
-    
-<p><b>New since 2010-07-01</b>
-<ul>
-    <li>Context menus
-    <li>Rollup strength accounts for depletion
-    <li>Bug fix: Halleck now accepts subordinates
-    <li>Bug fix: No more multiple Buckner divisions on [Load Game]
-</ul>
-    
-<p><b>New since 2010-06-29</b>
-<ul>
-    <li>Tooltips are confined to the card name (instead of the entire list item including subordinates)
-    <li>Top-level leaders have strength roll-ups
-    <li>Depleted units shown in red (still no way to deplete a unit, but [Load Game] loads a couple)
-</ul>
-    
-<p><b>New since 2010-06-16</b>
-<ul>
-    <li>Can't drag CSA cards to USA or vice versa
-    <li>Real decks are there (need vetting, though)
-    <li>Leaders have flags/circles instead of NATO symbol
-    <li>Icons for all card types
-    <li>Drawn cards with special info get a tooltip (but it doesn't travel with the card)
-    <li>Cards with special rules have asterisks
-    <li>leader initiative is shown as part of the label
-    <li>Load Game
-</ul>
-    
-<p><b>New since 2010-06-03</b>
-<ul>
-    <li>Leaders got a symbol
-    <li>More USA holding areas
-    <li>CSA holding areas
-    <li>Groups dragged to cadre or hand are automatically unstacked
-    <li>"Draw Card" links
-</ul>
-      
 <p><b>TODO</b>
 <ul>
-    <li>Context menu Flip should be unavailable when unit is in hand
+    <li>Context menu unavailable when unit is in hand
+    <li>Context menu Deplete/Restore unavailable in cadre
+    <li>Flipping leader shouldn't "double-flip" flipped subordinates
     <li>User is CSA/USA/Neither, can't drag/menu unowned cards
     <li>Add logging
-<ul>
+</ul>
+
+<div id="log">
+</div>
 
 <script type="text/javascript">
     jQuery(domLoaded);
