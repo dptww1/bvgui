@@ -31,6 +31,7 @@ function drawCard(side) {
         }
 
         activateCard(side + "Hand", id);
+        BVG.Logger.drawCard(id);
 
     } else {
         debugger;
@@ -157,11 +158,14 @@ function setupSubtree(parentId, childHash) {
 
 function setupGame(game) {
     BVG.State.initialize();
+    BVG.Logger.initialize();
 
     $(".oobRoot li").each( function(idx, elt) { $(elt).remove(); } );
     _.each(_.keys(game), function(id) {
         setupSubtree(id, game[id]);
     });
+
+    BVG.Logger.newGame();
 }
 
 function loadGame() {
