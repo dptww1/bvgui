@@ -5,39 +5,31 @@ if (BVG == undefined) {
 function syncContainers() {
     // Heights fails because adding a new card increases the height of the xxxHand element,
     // even if no expansion is necessary. TODO: workaround
+/*
     // Heights
-    _.each(["#usa", "#csa"],  function(side) {
-        var maxHeight = _.reduce(["Hand", "West", "East", "Cadre"],
-                                 function(n, column) {
-                                     $(side + column).css({ height: "auto" });
-                                     return Math.max(n, $(side + column).height());
-                                 },
-                                 0);
-
-        _.each(["Hand", "West", "East", "Cadre"], function(column) {
-            $(side + column).height(maxHeight);
+    $A(["usa", "csa"]).each( function(side) {
+        var maxHeight = 0;
+        $A(["Hand", "West", "East", "Cadre"]).each( function(column) {
+            maxHeight = Math.max(maxHeight, $(side + column).getHeight());
         });
-
-//        console.log("syncContainers h " + side + " => " + maxHeight);
+        $A(["Hand", "West", "East", "Cadre"]).each( function(column) {
+            $(side + column).setStyle({ height: maxHeight + "px"});
+        });
     });
+*/
 
     // Same problem with widths
-
-    // Widths
 /*
-    _.each(["Hand", "West", "East", "Cadre"], function(column) {
-        var maxWidth = _.reduce(["#usa", "#csa"],
-                                function(n, side) {
-                                    $(side + column).css({ width: "auto" });
-                                    return Math.max(n, $(side + column).width());
-                                },
-                                0);
-
-        _.each(["#usa", "#csa"], function(side) {
-            $(side + column).width(maxWidth);
+    // Widths
+    $A(["Hand", "West", "East", "Cadre"]).each( function(column) {
+        var maxWidth = 0;
+        $A(["usa", "csa"]).each( function(side) {
+            maxWidth = Math.max(maxWidth, $(side + column).getWidth());
         });
 
-        console.log("syncContainers w " + column + " => " + maxWidth);
+        $A(["usa", "csa"]).each( function(side) {
+            $(side + column).setStyle({ width: maxWidth + "px"});
+        });
     });
 */
 }
@@ -52,8 +44,6 @@ function drawCard(side) {
         }
 
         activateCard(side + "Hand", id);
-        syncContainers();
-        BVG.Logger.drawCard(id);
 
     } else {
         debugger;
@@ -90,7 +80,7 @@ function dropCard(dropEltId, dragEltId) {
     var newParentElt = findTopLevelLeader("#" + dragEltId);
 
     // Recompute the old parent element, unless it's the dragged element itself
-    if (oldParentElt != null && oldParentElt.id !== dragEltId) {
+    if (oldParentElt.id !== dragEltId) {
         computeRollupStrength(oldParentElt);
     }
 
@@ -124,8 +114,7 @@ function makeDraggable(card) {
         revert:         "invalid",
         revertDuration: 250,
         start:          createDropTargets,
-        stop:           clearDropTargets,
-        zIndex:         10
+        stop:           clearDropTargets
     } );
 }
 
@@ -135,8 +124,7 @@ function createDropTargets(event, ui) {
         $("#" + id).droppable( {
             drop:       function(event, ui) { dropCard(event.target.id, ui.draggable[0].id); },
             greedy:     true,
-            hoverClass: "okToDrop",
-            tolerance:  "pointer"
+            hoverClass: "okToDrop"
         } );
 
         activeDropTargets.push(id);
@@ -153,6 +141,7 @@ function activateCard(parent, id) {
     var container = $("#" + parent).find("ul")[0];
     var cardNode = BVG.DomUtil.mkCardNode(card);
     $(container).append(cardNode);
+    syncContainers();
     $("#" + id).slideDown();
     // after DOM element is added into document, it's safe to make tooltip
     BVG.DomUtil.activateToolTip(card);
@@ -178,16 +167,11 @@ function setupSubtree(parentId, childHash) {
 
 function setupGame(game) {
     BVG.State.initialize();
-    BVG.Logger.initialize();
 
     $(".oobRoot li").each( function(idx, elt) { $(elt).remove(); } );
-    
     _.each(_.keys(game), function(id) {
         setupSubtree(id, game[id]);
     });
-
-    syncContainers();
-    BVG.Logger.newGame();
 }
 
 function loadGame() {
@@ -202,7 +186,6 @@ function domLoaded() {
 
     var game = JSON.parse(BVG.Server.newGame());
     setupGame(game);
-    syncContainers();
 
     $("#usaDrawCardLink").attr("href", "javascript:drawCard('usa')");
     $("#csaDrawCardLink").attr("href", "javascript:drawCard('csa')");
