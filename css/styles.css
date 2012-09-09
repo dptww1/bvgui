@@ -29,10 +29,10 @@ body {
 }
 
 #csaCadre {
-//    min-height: 100px;
     background-color: #ccc;
     border: 1px solid #333;
     padding: 1em;
+    min-height: 120px;
 }
 
 #csaCadre ul {
@@ -44,28 +44,25 @@ body {
     background-color: #ffe;
     border: 1px solid #333;
     padding: 1em;
-//    min-height: 100px;
 }
 
 #csaEast {
     background-color: #ffe;
     border: 1px solid #333;
     padding: 1em;
-//    min-height: 100px;
 }
 
 #csaHand {
     background-color: #ffe;
     border: 1px solid #333;
     padding: 1em;
-//    min-height: 100px;
 }
 
 #usaCadre {
-//    min-height: 100px;
     background-color: #ccc;
     border: 1px solid #333;
     padding: 1em;
+    min-height: 120px;
 }
 
 #usaCadre ul {
@@ -77,21 +74,18 @@ body {
     background-color: #ddf;
     border: 1px solid #333;
     padding: 1em;
-//    min-height: 100px;
 }
 
 #usaEast {
     background-color: #ddf;
     border: 1px solid #333;
     padding: 1em;
-//    min-height: 100px;
 }
 
 #usaHand {
     background-color: #ddf;
     border: 1px solid #333;
     padding: 1em;
-//    min-height: 100px;
     height: auto;
 }
 
@@ -115,13 +109,15 @@ div.tooltip {
     padding: 0.25em;
 }
 
-//.depleted:before {
-//    content: "(";
-//}
+/*
+.depleted:before {
+    content: "(";
+}
 
-//.depleted:after {
-//    content: "(-)";
-//}
+.depleted:after {
+    content: "(-)";
+}
+*/
 
 .depleted {
     text-decoration: underline;
