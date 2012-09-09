@@ -5,33 +5,20 @@ if (BVG == undefined) {
 function syncContainers() {
     // Heights fails because adding a new card increases the height of the xxxHand element,
     // even if no expansion is necessary. TODO: workaround
-/*
-    // Heights
-    $A(["usa", "csa"]).each( function(side) {
-        var maxHeight = 0;
-        $A(["Hand", "West", "East", "Cadre"]).each( function(column) {
-            maxHeight = Math.max(maxHeight, $(side + column).getHeight());
-        });
-        $A(["Hand", "West", "East", "Cadre"]).each( function(column) {
-            $(side + column).setStyle({ height: maxHeight + "px"});
-        });
-    });
-*/
+    _.each(["#usa", "#csa"], function(side) {
+        var maxHeight = _.reduce(["Hand", "West", "East", "Cadre"],
+                                 function(n, column) {
+                                     $(side + column).css({ height: "auto" });
+                                     return Math.max(n, $(side + column).height());
+                                 },
+                                 0);
 
-    // Same problem with widths
-/*
-    // Widths
-    $A(["Hand", "West", "East", "Cadre"]).each( function(column) {
-        var maxWidth = 0;
-        $A(["usa", "csa"]).each( function(side) {
-            maxWidth = Math.max(maxWidth, $(side + column).getWidth());
+        _.each(["Hand", "West", "East", "Cadre"], function(column) {
+            $(side + column).height(maxHeight);
         });
 
-        $A(["usa", "csa"]).each( function(side) {
-            $(side + column).setStyle({ width: maxWidth + "px"});
-        });
+//console.log("syncContainers h " + side + " => " + maxHeight);
     });
-*/
 }
 
 function drawCard(side) {
@@ -80,13 +67,15 @@ function dropCard(dropEltId, dragEltId) {
     var newParentElt = findTopLevelLeader("#" + dragEltId);
 
     // Recompute the old parent element, unless it's the dragged element itself
-    if (oldParentElt.id !== dragEltId) {
+    if (oldParentElt != null && oldParentElt.id !== dragEltId) {
         computeRollupStrength(oldParentElt);
     }
 
     // Recompute the strength of the top level leader incorporating the dragged element, even
     // if the latter *is* a top level leader.
     computeRollupStrength(newParentElt);
+
+    syncContainers();
 }
 
 function computeRollupStrength(elt) {
@@ -141,13 +130,14 @@ function activateCard(parent, id) {
     var container = $("#" + parent).find("ul")[0];
     var cardNode = BVG.DomUtil.mkCardNode(card);
     $(container).append(cardNode);
-    syncContainers();
-    $("#" + id).slideDown();
-    // after DOM element is added into document, it's safe to make tooltip
-    BVG.DomUtil.activateToolTip(card);
-    makeDraggable(card);
-    BVG.CtxMenu.addTo("#" + card.id);
-    computeRollupStrength(findTopLevelLeader($(container).children()[0]));
+    $("#" + id).slideDown("fast", function() {
+                                      // after DOM element is added into document, it's safe to make tooltip
+                                      BVG.DomUtil.activateToolTip(card);
+                                      makeDraggable(card);
+                                      BVG.CtxMenu.addTo("#" + card.id);
+                                      computeRollupStrength(findTopLevelLeader($(container).children()[0]));
+                                      syncContainers();
+                                  });
 }
 
 function setupSubtree(parentId, childHash) {
